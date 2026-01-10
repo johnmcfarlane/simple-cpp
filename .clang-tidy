@@ -1,0 +1,30 @@
+---
+# TODO: Re-enable readability-redundant-declaration once modules support is more mature.
+Checks: >
+  *,
+  -altera-*,
+  -google-readability-namespace-comments,
+  -llvm-namespace-comment,
+  -llvmlibc-*,
+  -misc-include-cleaner,
+  -readability-redundant-declaration,
+WarningsAsErrors:
+  - '*'
+HeaderFileExtensions:
+  - ''
+  - h
+  - hh
+  - hpp
+  - hxx
+ImplementationFileExtensions:
+  - c
+  - cc
+  - cpp
+  - cxx
+HeaderFilterRegex: '.*'
+ExcludeHeaderFilterRegex: '/usr/' # TODO: Remove this once modules support is more mature.
+FormatStyle:     none
+User:            vscode
+CheckOptions:    {}
+SystemHeaders:   false
+...

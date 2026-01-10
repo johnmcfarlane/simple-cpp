@@ -1,0 +1,22 @@
+FROM mcr.microsoft.com/devcontainers/base:trixie
+
+RUN wget https://apt.llvm.org/llvm.sh \
+  && chmod +x llvm.sh \
+  && ./llvm.sh 22 \
+  && rm llvm.sh \
+  && apt-get install --no-install-recommends --quiet --yes clang-tidy-22 gdb libc++-22-dev libc++abi-22-dev ninja-build python3-pip \
+  && apt-get purge --yes gcc g++ \
+  && apt-get --quiet --yes autoremove \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-22 1 \
+  && update-alternatives --install /usr/bin/clang clang /usr/bin/clang-22 1 \
+  && update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-22 1
+
+RUN pip install "cmake~=4.2.1" "conan~=2.24.0" --break-system-packages --no-cache-dir
+
+COPY .devcontainer/images/clang/conan-config /tmp/conan-config
+COPY .clang-tidy /
+
+ENV BUILD_DIR=/tmp/build
+ENV CONAN_HOME=/tmp/conan

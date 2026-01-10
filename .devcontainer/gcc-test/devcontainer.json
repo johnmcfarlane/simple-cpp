@@ -1,0 +1,24 @@
+// built with GCC; optimized for testing
+{
+	"name": "GCC test",
+	"build": {
+		"dockerfile": "${localWorkspaceFolder}/.devcontainer/images/gcc/Dockerfile",
+		"context": "${localWorkspaceFolder}"
+	},
+	"postCreateCommand": {
+		"prep-build-dir": [
+			".devcontainer/prep-build-dir",
+			"gcc-test",
+			"Release",
+			"-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON"
+		]
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.cmake-tools",
+				"ms-vscode.cpptools"
+			]
+		}
+	}
+}
