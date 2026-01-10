@@ -1,0 +1,40 @@
+---
+name: push
+
+on:
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+
+jobs:
+  tests:
+    name: Run tests
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        name:
+          [
+            "clang-debug",
+            "clang-test",
+            "clang-tidy",
+            "gcc-debug",
+            "gcc-test"
+          ]
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Build tests
+        uses: devcontainers/ci@v0.3
+        with:
+          configFile: .devcontainer/${{ matrix.name }}/devcontainer.json
+          runCmd: cmake --build $BUILD_DIR
+
+      - name: Run tests
+        uses: devcontainers/ci@v0.3
+        with:
+          configFile: .devcontainer/${{ matrix.name }}/devcontainer.json
+          runCmd: ctest --output-on-failure --test-dir $BUILD_DIR
