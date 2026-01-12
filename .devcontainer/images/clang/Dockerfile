@@ -1,23 +1,35 @@
 FROM mcr.microsoft.com/devcontainers/base:trixie
 
-RUN wget https://apt.llvm.org/llvm.sh \
-  && chmod +x llvm.sh \
-  && ./llvm.sh 22 \
-  && rm llvm.sh \
-  && apt-get install --no-install-recommends --quiet --yes clang-format-22 clang-tidy-22 gdb libc++-22-dev libc++abi-22-dev ninja-build python3-pip \
-  && apt-get purge --yes gcc g++ \
+RUN apt-get update --quiet \
+  && apt-get install --no-install-recommends --quiet --yes binutils clang cmake libz3-4 ninja-build python3-pip \
+  && git clone --branch=main --depth=1 https://github.com/llvm/llvm-project.git \
+  && mkdir build \
+  && cd build \
+  && CXX=/usr/bin/clang++ CC=/usr/bin/clang cmake \
+    -GNinja \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" \
+    -DLLVM_ENABLE_RUNTIMES="compiler-rt;libcxx;libcxxabi;libunwind" \
+    ../llvm-project/llvm \
+  && ninja install \
+  && cd .. \
+  && apt-get purge --yes --autoremove clang gcc \
+  && apt-get install --no-install-recommends --yes build-essential \
   && apt-get --quiet --yes autoremove \
-  && rm -rf /var/lib/apt/lists/*
+  && rm -rf llvm-project build /var/lib/apt/lists/*
+RUN apt-get update --quiet \
+  && apt-get install --no-install-recommends --quiet --yes build-essential gdb \
+  && apt-get purge --yes clang gcc g++
 
-RUN update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-22 1 \
-  && update-alternatives --install /usr/bin/clang clang /usr/bin/clang-22 1 \
-  && update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-22 1 \
-  && update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-22 1
+RUN update-alternatives --install /usr/bin/clang++ clang++ /usr/local/bin/clang++ 1 \
+  && update-alternatives --install /usr/bin/clang clang /usr/local/bin/clang 1 \
+  && update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 1 \
+  && update-alternatives --install /usr/bin/cc cc /usr/bin/clang 1
+ENV CC=/usr/bin/clang
+ENV CXX=/usr/bin/clang++
+ENV LD_LIBRARY_PATH=/usr/local/lib/x86_64-unknown-linux-gnu
 
 RUN pip install "cmake~=4.2.1" "conan~=2.24.0" --break-system-packages --no-cache-dir
 
 COPY .devcontainer/images/clang/conan-config /tmp/conan-config
 COPY .clang-tidy /
-
-ENV BUILD_DIR=/tmp/build
-ENV CONAN_HOME=/tmp/conan
