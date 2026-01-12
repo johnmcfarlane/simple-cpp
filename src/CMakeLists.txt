@@ -1,5 +1,7 @@
 find_package(Catch2 REQUIRED)
 
+add_subdirectory(provocative)
+
 add_library(simple)
 target_sources(simple
   PUBLIC
