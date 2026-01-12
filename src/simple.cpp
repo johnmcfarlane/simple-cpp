@@ -9,6 +9,7 @@ namespace simple
     export constexpr auto add(auto lhs, auto rhs)
     {
         std::println("{} + {} = {}", lhs, rhs, lhs + rhs);
-        return lhs + rhs;
-    }
+        if (lhs <= rhs)
+            return lhs + rhs;
+   }
 }
