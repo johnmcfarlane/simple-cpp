@@ -1,0 +1,163 @@
+---
+# tests of the checks required by CI, i.e. test tests
+name: ci-test
+
+on:
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+
+jobs:
+  tests:
+    name: Run tests
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        include:
+          - name: clang-debug-ccg
+            devcontainer: clang-debug
+            flag: TRIGGER_CCG_VIOLATION
+            compiles: 1
+            passes: 1
+          - name: clang-debug-sanitizer
+            devcontainer: clang-debug
+            flag: TRIGGER_SANITIZER
+            compiles: 1
+            passes: 0
+          - name: clang-debug-warning
+            devcontainer: clang-debug
+            flag: TRIGGER_COMPILER_WARNING
+            compiles: 0
+            passes: 0
+
+          - name: clang-release-ccg
+            devcontainer: clang-release
+            flag: TRIGGER_CCG_VIOLATION
+            compiles: 1
+            passes: 1
+          - name: clang-release-sanitizer
+            devcontainer: clang-release
+            flag: TRIGGER_SANITIZER
+            compiles: 1
+            passes: 1
+          - name: clang-release-warning
+            devcontainer: clang-release
+            flag: TRIGGER_COMPILER_WARNING
+            compiles: 1
+            passes: 1 
+
+          - name: clang-test-ccg
+            devcontainer: clang-test
+            flag: TRIGGER_CCG_VIOLATION
+            compiles: 1
+            passes: 1
+          - name: clang-test-sanitizer
+            devcontainer: clang-test
+            flag: TRIGGER_SANITIZER
+            compiles: 1
+            passes: 0
+          - name: clang-test-warning
+            devcontainer: clang-test
+            flag: TRIGGER_COMPILER_WARNING
+            compiles: 0
+            passes: 0
+
+          - name: clang-tidy-ccg
+            devcontainer: clang-tidy
+            flag: TRIGGER_CCG_VIOLATION
+            compiles: 0
+            passes: 0
+          - name: clang-tidy-sanitizer
+            devcontainer: clang-tidy
+            flag: TRIGGER_SANITIZER
+            compiles: 1
+            passes: 0
+          - name: clang-tidy-warning
+            devcontainer: clang-tidy
+            flag: TRIGGER_COMPILER_WARNING
+            compiles: 0
+            passes: 0
+
+          - name: gcc-debug-ccg
+            devcontainer: gcc-debug
+            flag: TRIGGER_CCG_VIOLATION
+            compiles: 1
+            passes: 1
+          - name: gcc-debug-sanitizer
+            devcontainer: gcc-debug
+            flag: TRIGGER_SANITIZER
+            compiles: 1
+            passes: 0
+          - name: gcc-debug-warning
+            devcontainer: gcc-debug
+            flag: TRIGGER_COMPILER_WARNING
+            compiles: 0
+            passes: 0
+
+          - name: gcc-release-ccg
+            devcontainer: gcc-release
+            flag: TRIGGER_CCG_VIOLATION
+            compiles: 1
+            passes: 1
+          - name: gcc-release-sanitizer
+            devcontainer: gcc-release
+            flag: TRIGGER_SANITIZER
+            compiles: 1
+            passes: 1
+          - name: gcc-release-warning
+            devcontainer: gcc-release
+            flag: TRIGGER_COMPILER_WARNING
+            compiles: 1
+            passes: 1
+
+          - name: gcc-test-ccg
+            devcontainer: gcc-test
+            flag: TRIGGER_CCG_VIOLATION
+            compiles: 1
+            passes: 1
+          - name: gcc-test-sanitizer
+            devcontainer: gcc-test
+            flag: TRIGGER_SANITIZER
+            compiles: 1
+            passes: 0
+          - name: gcc-test-warning
+            devcontainer: gcc-test
+            flag: TRIGGER_COMPILER_WARNING
+            compiles: 0
+            passes: 0
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Build successful tests
+        if: ${{ matrix.compiles }}
+        uses: devcontainers/ci@v0.3
+        with:
+          configFile: .devcontainer/${{ matrix.devcontainer }}/devcontainer.json
+          env: ${{ matrix.flag }}=1
+          runCmd: "cmake --build $BUILD_DIR"
+
+      - name: Build unsuccessful tests
+        if: ${{ ! matrix.compiles }}
+        uses: devcontainers/ci@v0.3
+        with:
+          configFile: .devcontainer/${{ matrix.devcontainer }}/devcontainer.json
+          env: ${{ matrix.flag }}=1
+          runCmd: "! cmake --build $BUILD_DIR"
+
+      - name: Run tests successfully
+        if: ${{ matrix.passes }}
+        uses: devcontainers/ci@v0.3
+        with:
+          configFile: .devcontainer/${{ matrix.devcontainer }}/devcontainer.json
+          runCmd: "ctest --output-on-failure --test-dir $BUILD_DIR"
+
+      - name: Run tests successfully
+        if: ${{ ! matrix.passes }}
+        uses: devcontainers/ci@v0.3
+        with:
+          configFile: .devcontainer/${{ matrix.devcontainer }}/devcontainer.json
+          runCmd: "! ctest --output-on-failure --test-dir $BUILD_DIR"

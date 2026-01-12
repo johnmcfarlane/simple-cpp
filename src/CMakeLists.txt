@@ -1,5 +1,7 @@
 find_package(Catch2 REQUIRED)
 
+add_subdirectory(ci-test)
+
 add_library(simple)
 target_sources(simple
   PUBLIC
