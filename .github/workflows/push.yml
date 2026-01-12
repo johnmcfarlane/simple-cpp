@@ -17,16 +17,6 @@ jobs:
 
     strategy:
       matrix:
-        name:
-          [
-            "clang-debug",
-            "clang-release",
-            "clang-test",
-            "clang-tidy",
-            "gcc-debug",
-            "gcc-release",
-            "gcc-test"
-          ]
         include:
           - name: clang-debug
             imageName: clang
