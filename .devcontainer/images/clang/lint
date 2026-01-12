@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# run from working directory
+
+set -euox pipefail
+
+find . -iname '*.h' -o -iname '*.cpp' | xargs \
+  clang-format \
+    --Werror \
+    --fail-on-incomplete-format \
+    -i
+
+git diff --exit-code
