@@ -1,0 +1,23 @@
+// built with GCC; optimized for production
+{
+	"name": "GCC release",
+	"build": {
+		"dockerfile": "${localWorkspaceFolder}/.devcontainer/images/gcc/Dockerfile",
+		"context": "${localWorkspaceFolder}"
+	},
+	"postCreateCommand": {
+		"prep-build-dir": [
+			".devcontainer/prep-build-dir",
+			"gcc-release",
+			"Release"
+		]
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.cmake-tools",
+				"ms-vscode.cpptools"
+			]
+		}
+	}
+}
