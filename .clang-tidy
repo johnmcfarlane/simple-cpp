@@ -3,6 +3,7 @@
 Checks: >
   *,
   -altera-*,
+  -fuchsia-trailing-return,
   -google-readability-namespace-comments,
   -llvm-namespace-comment,
   -llvmlibc-*,
