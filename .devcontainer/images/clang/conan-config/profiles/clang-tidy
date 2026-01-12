@@ -7,5 +7,5 @@ compiler.libcxx=libc++
 
 [conf]
 !&:tools.build:cxxflags=["-fsanitize-trap", "-fsanitize=address,undefined"]
-&:tools.build:cxxflags=["-fsanitize-trap", "-fsanitize=address,undefined", "-Werror", "-Wextra"]
+&:tools.build:cxxflags=["-fsanitize-trap", "-fsanitize=address,undefined", "-Wall", "-Werror", "-Wextra"]
 tools.cmake.cmaketoolchain:generator=Ninja
