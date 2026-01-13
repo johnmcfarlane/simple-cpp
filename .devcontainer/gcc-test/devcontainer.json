@@ -9,7 +9,7 @@
 		"prep-build-dir": [
 			".devcontainer/prep-build-dir",
 			"gcc-test",
-			"Debug"
+			"Release"
 		]
 	},
 	"customizations": {
