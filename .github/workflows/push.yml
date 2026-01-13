@@ -11,6 +11,9 @@ jobs:
   unit-tests:
     name: Run unit tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
     strategy:
       matrix:
@@ -24,22 +27,41 @@ jobs:
             "gcc-release",
             "gcc-test"
           ]
+        include:
+          - name: clang-debug
+            imageName: clang
+          - name: clang-release
+            imageName: clang
+          - name: clang-test
+            imageName: clang
+          - name: clang-tidy
+            imageName: clang
+          - name: gcc-debug
+            imageName: gcc
+          - name: gcc-release
+            imageName: gcc
+          - name: gcc-test
+            imageName: gcc
 
     steps:
       - name: Check out code
         uses: actions/checkout@v3
 
-      - name: Build tests
-        uses: devcontainers/ci@v0.3
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
         with:
-          configFile: .devcontainer/${{ matrix.name }}/devcontainer.json
-          runCmd: cmake --build $BUILD_DIR
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run tests
+      - name: Build and run tests
         uses: devcontainers/ci@v0.3
         with:
           configFile: .devcontainer/${{ matrix.name }}/devcontainer.json
-          runCmd: ctest --output-on-failure --test-dir $BUILD_DIR
+          imageName: ghcr.io/johnmcfarlane/${{ matrix.imageName }}
+          runCmd: |
+            cmake --build $BUILD_DIR
+            ctest --output-on-failure --test-dir $BUILD_DIR
 
   lint:
     name: Run lint tests
@@ -48,6 +70,13 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2 
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run linter
         uses: devcontainers/ci@v0.3
