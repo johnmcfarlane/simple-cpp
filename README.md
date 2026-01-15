@@ -6,7 +6,7 @@
 
 A [Development Containers](https://containers.dev/)-based setup is supported and tested with the [VS Code Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension.
 
-View any [Dockerfile](.devcontainer/images/gcc/Dockerfile) for an example of system requirements, which include
+View any [Dockerfile](.devcontainer/base-gcc/Dockerfile) for an example of system requirements, which include
 
 * [Clang](https://clang.llvm.org/) 22 or [GCC](https://gcc.gnu.org/) 16
 * [CMake](https://cmake.org/) 4.2.1

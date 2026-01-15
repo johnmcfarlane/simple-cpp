@@ -1,23 +1,20 @@
 // built with GCC; optimized for debugging
 {
-	"name": "GCC debug",
-	"build": {
-		"dockerfile": "${localWorkspaceFolder}/.devcontainer/images/gcc/Dockerfile",
-		"context": "${localWorkspaceFolder}"
-	},
-	"postCreateCommand": {
-		"prep-build-dir": [
-			".devcontainer/prep-build-dir",
-			"gcc-debug",
-			"Debug"
-		]
-	},
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"ms-vscode.cmake-tools",
-				"ms-vscode.cpptools"
-			]
-		}
-	}
+    "name": "GCC debug",
+    "build": {
+        "dockerfile": "${localWorkspaceFolder}/.devcontainer/gcc-debug/Dockerfile",
+        "context": "${localWorkspaceFolder}"
+    },
+    "remoteUser": "root",
+    "postCreateCommand": {
+        "configure build system": [
+            "cmake",
+            "--toolchain", "/tmp/build/conan_toolchain.cmake",
+            "-B", "/tmp/build",
+            "-DCMAKE_BUILD_TYPE=Debug",
+            "-DCMAKE_PREFIX_PATH=/tmp/build",
+            "-G", "Ninja",
+            "-S", "."
+        ]
+    }
 }

@@ -15,7 +15,10 @@ RUN apt-get update --quiet \
 
 RUN pip install "cmake~=4.2.1" "conan~=2.24.0" --break-system-packages --no-cache-dir
 
-COPY .devcontainer/images/gcc/conan-config /tmp/conan-config
+COPY .clang-tidy /
 
-ENV BUILD_DIR=/tmp/build
+# configure Conan
 ENV CONAN_HOME=/tmp/conan
+COPY .devcontainer/base-gcc/conan-config /tmp/conan-config
+RUN conan config install /tmp/conan-config
+RUN conan profile detect --force

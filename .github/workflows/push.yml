@@ -8,27 +8,54 @@ on:
   workflow_dispatch:
 
 jobs:
+  images:
+    name: Build compiler images
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        include:
+          - name: base-clang
+            tag: 3
+          - name: base-gcc
+            tag: latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build image
+        uses: devcontainers/ci@v0.3
+        with:
+          configFile: .devcontainer/${{ matrix.name }}/devcontainer.json
+          imageName: ghcr.io/johnmcfarlane/simple-cpp/${{ matrix.name }}
+          imageTag: ${{ matrix.tag }}
+          runCmd: |
+            which conan
+            conan --version
+
   unit-tests:
-    name: Run unit tests
+    name: Test
+    needs: [images]
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         include:
           - name: clang-debug
-            imageName: clang
           - name: clang-release
-            imageName: clang
           - name: clang-test
-            imageName: clang
           - name: clang-tidy
-            imageName: clang
           - name: gcc-debug
-            imageName: gcc
           - name: gcc-release
-            imageName: gcc
           - name: gcc-test
-            imageName: gcc
 
     steps:
       - name: Check out code
@@ -45,13 +72,15 @@ jobs:
         uses: devcontainers/ci@v0.3
         with:
           configFile: .devcontainer/${{ matrix.name }}/devcontainer.json
-          imageName: ghcr.io/johnmcfarlane/${{ matrix.imageName }}
+          imageName: ghcr.io/johnmcfarlane/simple-cpp/${{ matrix.name }}
+          imageTag: 2
           runCmd: |
             cmake --build $BUILD_DIR
             ctest --output-on-failure --test-dir $BUILD_DIR
 
   lint:
-    name: Run lint tests
+    name: Lint
+    needs: [images]
     runs-on: ubuntu-latest
 
     steps:
@@ -68,5 +97,6 @@ jobs:
       - name: Run linter
         uses: devcontainers/ci@v0.3
         with:
-          configFile: .devcontainer/clang-lint/devcontainer.json
-          runCmd: .devcontainer/images/clang/lint
+          configFile: .devcontainer/lint/devcontainer.json
+          imageName: ghcr.io/johnmcfarlane/simple-cpp/base-clang
+          runCmd: .devcontainer/lint/lint
