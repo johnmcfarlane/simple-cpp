@@ -1,6 +1,6 @@
-// check formatting
+// image with Clang nightly build
 {
-	"name": "clang-lint",
+	"name": "Clang base image",
 	"build": {
 		"dockerfile": "${localWorkspaceFolder}/.devcontainer/clang-base/Dockerfile",
 		"context": "${localWorkspaceFolder}"

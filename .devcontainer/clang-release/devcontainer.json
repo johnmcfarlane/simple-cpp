@@ -2,17 +2,23 @@
 {
 	"name": "Clang release",
 	"build": {
-		"dockerfile": "${localWorkspaceFolder}/.devcontainer/images/clang/Dockerfile",
+		"dockerfile": "${localWorkspaceFolder}/.devcontainer/clang-release/Dockerfile",
 		"context": "${localWorkspaceFolder}"
 	},
-	"postCreateCommand": {
-		"prep-build-dir": [
-			".devcontainer/prep-build-dir",
-			"clang-release",
-			"Release",
-			"-DCMAKE_CXX_STDLIB_MODULES_JSON=/usr/lib/llvm-22/lib/libc++.modules.json"  // https://stackoverflow.com/a/79852649/671509
-		]
-	},
+    "remoteUser": "root",
+    "postCreateCommand": {
+        "prep-build-dir": [
+            "cmake",
+            "--toolchain", "${containerEnv:BUILD_DIR}/conan_toolchain.cmake",
+            "-B", "${containerEnv:BUILD_DIR}",
+            "-DCMAKE_BUILD_TYPE=Release",
+            "-DCMAKE_PREFIX_PATH=${containerEnv:BUILD_DIR}",
+            "-G", "Ninja",
+            "-S", ".",
+            "-DCMAKE_CXX_STDLIB_MODULES_JSON=/usr/lib/llvm-22/lib/libc++.modules.json",
+            "-DCMAKE_CXX_CLANG_TIDY=clang-tidy"
+        ]
+    },
 	"customizations": {
 		"vscode": {
 			"extensions": [

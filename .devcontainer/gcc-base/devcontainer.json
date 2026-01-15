@@ -1,8 +1,8 @@
-// check formatting
+// image with GCC trunk build
 {
-	"name": "clang-lint",
+	"name": "GCC base image",
 	"build": {
-		"dockerfile": "${localWorkspaceFolder}/.devcontainer/clang-base/Dockerfile",
+		"dockerfile": "${localWorkspaceFolder}/.devcontainer/gcc-base/Dockerfile",
 		"context": "${localWorkspaceFolder}"
 	},
 	"customizations": {

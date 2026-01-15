@@ -5,7 +5,6 @@
 set -euox pipefail
 
 PROFILE="$1"
-BUILD_TYPE="${2:-'Release'}"
 
 mkdir -p "$BUILD_DIR"
 rm -f "$BUILD_DIR"/CMakeCache.txt
@@ -22,14 +21,3 @@ conan install \
     --output-folder="$BUILD_DIR" \
     --profile="$PROFILE" \
     .
-
-# configure build system
-cmake \
-    --toolchain "$BUILD_DIR"/conan_toolchain.cmake \
-    -B "$BUILD_DIR" \
-    -DCMAKE_BUILD_TYPE="$BUILD_TYPE" \
-    -DCMAKE_PREFIX_PATH="$BUILD_DIR" \
-    -DCMAKE_TOOLCHAIN_FILE="$BUILD_DIR"/conan_toolchain.cmake \
-    -G Ninja \
-    -S . \
-    "$@"
