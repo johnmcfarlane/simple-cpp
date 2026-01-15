@@ -1,0 +1,8 @@
+// image with GCC trunk build
+{
+    "name": "Build GCC image",
+    "build": {
+        "dockerfile": "${localWorkspaceFolder}/.devcontainer/base-gcc/Dockerfile",
+        "context": "${localWorkspaceFolder}"
+    }
+}

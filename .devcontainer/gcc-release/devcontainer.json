@@ -1,23 +1,19 @@
 // built with GCC; optimized for production
 {
-	"name": "GCC release",
-	"build": {
-		"dockerfile": "${localWorkspaceFolder}/.devcontainer/images/gcc/Dockerfile",
-		"context": "${localWorkspaceFolder}"
-	},
-	"postCreateCommand": {
-		"prep-build-dir": [
-			".devcontainer/prep-build-dir",
-			"gcc-release",
-			"Release"
-		]
-	},
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"ms-vscode.cmake-tools",
-				"ms-vscode.cpptools"
-			]
-		}
-	}
+    "name": "GCC release",
+    "build": {
+        "dockerfile": "${localWorkspaceFolder}/.devcontainer/gcc-release/Dockerfile",
+        "context": "${localWorkspaceFolder}"
+    },
+    "postCreateCommand": {
+        "configure build system": [
+            "cmake",
+            "--toolchain", "/tmp/build/conan_toolchain.cmake",
+            "-B", "/tmp/build",
+            "-DCMAKE_BUILD_TYPE=Release",
+            "-DCMAKE_PREFIX_PATH=/tmp/build",
+            "-G", "Ninja",
+            "-S", "."
+        ]
+    }
 }

@@ -1,24 +1,21 @@
 // built with Clang; optimized for debugging
 {
-	"name": "Clang debug",
-	"build": {
-		"dockerfile": "${localWorkspaceFolder}/.devcontainer/images/clang/Dockerfile",
-		"context": "${localWorkspaceFolder}"
-	},
-	"postCreateCommand": {
-		"prep-build-dir": [
-			".devcontainer/prep-build-dir",
-			"clang-debug",
-			"Debug",
-			"-DCMAKE_CXX_STDLIB_MODULES_JSON=/usr/lib/llvm-22/lib/libc++.modules.json"  // https://stackoverflow.com/a/79852649/671509
-		]
-	},
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"ms-vscode.cmake-tools",
-				"ms-vscode.cpptools"
-			]
-		}
-	}
+    "name": "Clang debug",
+    "build": {
+        "dockerfile": "${localWorkspaceFolder}/.devcontainer/clang-debug/Dockerfile",
+        "context": "${localWorkspaceFolder}"
+    },
+    "remoteUser": "root",
+    "postCreateCommand": {
+        "configure build system": [
+            "cmake",
+            "--toolchain", "/tmp/build/conan_toolchain.cmake",
+            "-B", "/tmp/build",
+            "-DCMAKE_BUILD_TYPE=Debug",
+            "-DCMAKE_PREFIX_PATH=/tmp/build",
+            "-G", "Ninja",
+            "-S", ".",
+            "-DCMAKE_CXX_STDLIB_MODULES_JSON=/usr/lib/llvm-22/lib/libc++.modules.json"
+        ]
+    }
 }

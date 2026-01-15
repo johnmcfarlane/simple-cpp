@@ -1,0 +1,8 @@
+// image with Clang nightly build
+{
+    "name": "Build Clang image",
+    "build": {
+        "dockerfile": "${localWorkspaceFolder}/.devcontainer/base-clang/Dockerfile",
+        "context": "${localWorkspaceFolder}"
+    }
+}
