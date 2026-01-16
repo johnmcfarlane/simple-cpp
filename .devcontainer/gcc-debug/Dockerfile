@@ -1,4 +1,4 @@
-FROM ghcr.io/johnmcfarlane/simple-cpp/base-gcc:latest
+FROM ghcr.io/johnmcfarlane/simple-cpp/base-gcc:1
 
 ENV BUILD_DIR=/tmp/build
 WORKDIR $BUILD_DIR
@@ -12,3 +12,5 @@ RUN conan install \
     --output-folder="$BUILD_DIR" \
     --profile=gcc-debug \
     .
+
+RUN cat $BUILD_DIR/conanbuild.sh >> ~/.bashrc

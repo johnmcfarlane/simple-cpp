@@ -1,2 +1,5 @@
-[requires]
-catch2/[~3.12.0]
+[test_requires]
+catch2/[>=3]
+
+[tool_requires]
+cmake/[>=4]

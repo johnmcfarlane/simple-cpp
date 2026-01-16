@@ -14,7 +14,7 @@ RUN update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-22 1
   && update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-22 1 \
   && update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-22 1
 
-RUN pip install "cmake~=4.2.1" "conan~=2.24.0" --break-system-packages --no-cache-dir
+RUN pip install "conan==2.24.0" --break-system-packages --no-cache-dir
 
 COPY .clang-tidy /
 
