@@ -13,7 +13,7 @@ RUN apt-get update --quiet \
   && apt-get install --no-install-recommends --quiet --yes libc6-dev \
   && rm -rf /gcc /build /var/lib/apt/lists/*
 
-RUN pip install "cmake~=4.2.1" "conan~=2.24.0" --break-system-packages --no-cache-dir
+RUN pip install "conan==2.24.0" --break-system-packages --no-cache-dir
 
 COPY .clang-tidy /
 
