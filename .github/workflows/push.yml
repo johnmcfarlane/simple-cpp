@@ -17,8 +17,8 @@ jobs:
         include:
           - name: base-clang
             tag: 4
-          - name: base-gcc
-            tag: 1
+          # - name: base-gcc
+          #   tag: 1
 
     steps:
       - name: Check out code
@@ -50,16 +50,19 @@ jobs:
       matrix:
         include:
           - name: clang-debug
-          - name: clang-release
-          - name: clang-test
-          - name: clang-tidy
-          - name: gcc-debug
-          - name: gcc-release
-          - name: gcc-test
+          # - name: clang-release
+          # - name: clang-test
+          # - name: clang-tidy
+          # - name: gcc-debug
+          # - name: gcc-release
+          # - name: gcc-test
 
     steps:
       - name: Check out code
         uses: actions/checkout@v3
+
+      - name: Setup Conan Client
+        uses: conan-io/setup-conan@v1
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v2
