@@ -8,4 +8,3 @@ compiler.libcxx=libc++
 [conf]
 !&:tools.build:cxxflags=["-fno-sanitize-recover=all", "-fsanitize=address,undefined"]
 &:tools.build:cxxflags=["-fno-sanitize-recover=all", "-fsanitize=address,undefined", "-Wall", "-Werror", "-Wextra"]
-tools.cmake.cmaketoolchain:generator=Ninja

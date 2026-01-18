@@ -7,4 +7,3 @@ compiler.cppstd=gnu26
 [conf]
 !&:tools.build:cxxflags=["-fsanitize-trap", "-fsanitize=address,undefined"]
 &:tools.build:cxxflags=["-fsanitize-trap", "-fsanitize=address,undefined", "-Wall", "-Werror", "-Wextra"]
-tools.cmake.cmaketoolchain:generator=Ninja
