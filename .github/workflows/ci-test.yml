@@ -6,6 +6,13 @@ on:
   push:
     branches:
       - '**'
+    paths:
+      - .clang-tidy
+      - .devcontainer/**
+      - .github/**
+      - '**/CMakeLists.txt'
+      - conanfile.txt
+      - src/ci-test/**
   workflow_dispatch:
 
 jobs:
