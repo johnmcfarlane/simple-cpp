@@ -17,5 +17,13 @@
             "-S", ".",
             "-DCMAKE_CXX_STDLIB_MODULES_JSON=/usr/lib/llvm-22/lib/libc++.modules.json"
         ]
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cmake-tools",
+                "ms-vscode.cpptools"
+            ]
+        }
     }
 }
