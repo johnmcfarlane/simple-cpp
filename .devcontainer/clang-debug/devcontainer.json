@@ -2,7 +2,11 @@
 {
     "name": "Clang debug",
     "build": {
-        "dockerfile": "${localWorkspaceFolder}/.devcontainer/clang-debug/Dockerfile",
+        "dockerfile": "${localWorkspaceFolder}/.devcontainer/Dockerfile",
+        "args": {
+            "base_image": "base-clang:4",
+            "profile": "clang-debug"
+        },
         "context": "${localWorkspaceFolder}"
     },
     "remoteUser": "root",

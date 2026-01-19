@@ -2,7 +2,11 @@
 {
     "name": "Clang release",
     "build": {
-        "dockerfile": "${localWorkspaceFolder}/.devcontainer/clang-release/Dockerfile",
+        "dockerfile": "${localWorkspaceFolder}/.devcontainer/Dockerfile",
+        "args": {
+            "base_image": "base-clang:4",
+            "profile": "clang-release"
+        },
         "context": "${localWorkspaceFolder}"
     },
     "remoteUser": "root",

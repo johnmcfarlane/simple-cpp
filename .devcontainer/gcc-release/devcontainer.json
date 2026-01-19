@@ -2,7 +2,11 @@
 {
     "name": "GCC release",
     "build": {
-        "dockerfile": "${localWorkspaceFolder}/.devcontainer/gcc-release/Dockerfile",
+        "dockerfile": "${localWorkspaceFolder}/.devcontainer/Dockerfile",
+        "args": {
+            "base_image": "base-gcc:1",
+            "profile": "gcc-release"
+        },
         "context": "${localWorkspaceFolder}"
     },
     "postCreateCommand": {
