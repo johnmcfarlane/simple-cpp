@@ -18,9 +18,9 @@ jobs:
       matrix:
         include:
           - name: base-clang
-            tag: 4
+            tag: 5
           - name: base-gcc
-            tag: 1
+            tag: 2
 
     steps:
       - name: Check out code
