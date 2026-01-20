@@ -1,5 +1,6 @@
 ARG base_image
-FROM ghcr.io/johnmcfarlane/simple-cpp/$base_image
+ARG base_image_version
+FROM ghcr.io/johnmcfarlane/simple-cpp/$base_image:$base_image_version
 
 ARG profile
 
