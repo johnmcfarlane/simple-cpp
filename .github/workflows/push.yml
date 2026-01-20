@@ -47,6 +47,8 @@ jobs:
     name: Test
     needs: [images]
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
 
     strategy:
       matrix:
