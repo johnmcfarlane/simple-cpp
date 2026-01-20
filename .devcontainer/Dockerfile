@@ -1,9 +1,8 @@
-ARG base_image
-ARG base_image_version
-FROM ghcr.io/johnmcfarlane/simple-cpp/$base_image:$base_image_version
+ARG base_image=error-missing-base_image-arg
+ARG base_image_version=error-missing-base_image_version-arg
+FROM ghcr.io/johnmcfarlane/simple-cpp/${base_image}:${base_image_version}
 
-ARG profile
-
+ARG profile=error-missing-profile-arg
 ENV BUILD_DIR=/tmp/build
 
 # install dependencies
@@ -13,7 +12,7 @@ RUN conan install \
     --generator=CMakeDeps \
     --generator=CMakeToolchain \
     --output-folder="$BUILD_DIR" \
-    --profile=$profile \
+    --profile=${profile} \
     .
 
 RUN cat $BUILD_DIR/conanbuild.sh >> ~/.bashrc
