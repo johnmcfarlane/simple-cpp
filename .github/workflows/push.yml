@@ -11,6 +11,8 @@ jobs:
   images:
     name: Build compiler images
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
 
     strategy:
       matrix:
