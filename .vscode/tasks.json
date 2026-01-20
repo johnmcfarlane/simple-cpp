@@ -6,7 +6,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "cmake --build ${env:BUILD_DIR}",
+            "command": "cmake --build ${env:BUILD_DIR} --verbose",
             "group": {
                 "kind": "build",
                 "isDefault": true

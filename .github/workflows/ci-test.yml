@@ -29,9 +29,14 @@ jobs:
             passes: 1
           - name: clang-debug-sanitizer
             devcontainer: clang-debug
-            flag: TRIGGER_SANITIZER
+            flag: TRIGGER_INTEGER_BUG
             compiles: 1
             passes: 0
+          - name: clang-debug-libcpp
+            devcontainer: clang-debug
+            flag: TRIGGER_STDLIB_BUG
+            compiles: 1
+            passes: 1
           - name: clang-debug-warning
             devcontainer: clang-debug
             flag: TRIGGER_COMPILER_WARNING
@@ -45,7 +50,12 @@ jobs:
             passes: 1
           - name: clang-release-sanitizer
             devcontainer: clang-release
-            flag: TRIGGER_SANITIZER
+            flag: TRIGGER_INTEGER_BUG
+            compiles: 1
+            passes: 1
+          - name: clang-release-libcpp
+            devcontainer: clang-release
+            flag: TRIGGER_STDLIB_BUG
             compiles: 1
             passes: 1
           - name: clang-release-warning
@@ -61,9 +71,14 @@ jobs:
             passes: 1
           - name: clang-test-sanitizer
             devcontainer: clang-test
-            flag: TRIGGER_SANITIZER
+            flag: TRIGGER_INTEGER_BUG
             compiles: 1
             passes: 0
+          - name: clang-test-libcpp
+            devcontainer: clang-test
+            flag: TRIGGER_STDLIB_BUG
+            compiles: 1
+            passes: 1
           - name: clang-test-warning
             devcontainer: clang-test
             flag: TRIGGER_COMPILER_WARNING
@@ -77,9 +92,14 @@ jobs:
             passes: 0
           - name: clang-tidy-sanitizer
             devcontainer: clang-tidy
-            flag: TRIGGER_SANITIZER
+            flag: TRIGGER_INTEGER_BUG
             compiles: 1
             passes: 0
+          - name: clang-tidy-libcpp
+            devcontainer: clang-tidy
+            flag: TRIGGER_STDLIB_BUG
+            compiles: 1
+            passes: 1
           - name: clang-tidy-warning
             devcontainer: clang-tidy
             flag: TRIGGER_COMPILER_WARNING
@@ -93,7 +113,12 @@ jobs:
             passes: 1
           - name: gcc-debug-sanitizer
             devcontainer: gcc-debug
-            flag: TRIGGER_SANITIZER
+            flag: TRIGGER_INTEGER_BUG
+            compiles: 1
+            passes: 0
+          - name: gcc-debug-libcpp
+            devcontainer: gcc-debug
+            flag: TRIGGER_STDLIB_BUG
             compiles: 1
             passes: 0
           - name: gcc-debug-warning
@@ -109,7 +134,12 @@ jobs:
             passes: 1
           - name: gcc-release-sanitizer
             devcontainer: gcc-release
-            flag: TRIGGER_SANITIZER
+            flag: TRIGGER_INTEGER_BUG
+            compiles: 1
+            passes: 1
+          - name: gcc-release-libcpp
+            devcontainer: gcc-release
+            flag: TRIGGER_STDLIB_BUG
             compiles: 1
             passes: 1
           - name: gcc-release-warning
@@ -125,7 +155,12 @@ jobs:
             passes: 1
           - name: gcc-test-sanitizer
             devcontainer: gcc-test
-            flag: TRIGGER_SANITIZER
+            flag: TRIGGER_INTEGER_BUG
+            compiles: 1
+            passes: 0
+          - name: gcc-test-libcpp
+            devcontainer: gcc-test
+            flag: TRIGGER_STDLIB_BUG
             compiles: 1
             passes: 0
           - name: gcc-test-warning
