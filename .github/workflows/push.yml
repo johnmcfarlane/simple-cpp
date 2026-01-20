@@ -9,7 +9,7 @@ on:
 
 jobs:
   images:
-    name: Build compiler images
+    name: images
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -44,7 +44,7 @@ jobs:
             conan --version
 
   unit-tests:
-    name: Test
+    name: test
     needs: [images]
     runs-on: ubuntu-latest
     permissions:
@@ -83,7 +83,7 @@ jobs:
             ctest --output-on-failure --test-dir $BUILD_DIR
 
   lint:
-    name: Lint
+    name: lint
     needs: [images]
     runs-on: ubuntu-latest
     permissions:
