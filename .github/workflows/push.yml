@@ -86,6 +86,8 @@ jobs:
     name: Lint
     needs: [images]
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
 
     steps:
       - name: Check out code
