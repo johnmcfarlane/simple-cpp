@@ -32,11 +32,11 @@ jobs:
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
             passes: 0
-          - name: clang-debug-libcpp
+          - name: clang-debug-stdlib
             devcontainer: clang-debug
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
-            passes: 1
+            passes: 0
           - name: clang-debug-warning
             devcontainer: clang-debug
             flag: TRIGGER_COMPILER_WARNING
@@ -53,7 +53,7 @@ jobs:
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
             passes: 1
-          - name: clang-release-libcpp
+          - name: clang-release-stdlib
             devcontainer: clang-release
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
@@ -74,11 +74,11 @@ jobs:
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
             passes: 0
-          - name: clang-test-libcpp
+          - name: clang-test-stdlib
             devcontainer: clang-test
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
-            passes: 1
+            passes: 0
           - name: clang-test-warning
             devcontainer: clang-test
             flag: TRIGGER_COMPILER_WARNING
@@ -95,11 +95,11 @@ jobs:
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
             passes: 0
-          - name: clang-tidy-libcpp
+          - name: clang-tidy-stdlib
             devcontainer: clang-tidy
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
-            passes: 1
+            passes: 0
           - name: clang-tidy-warning
             devcontainer: clang-tidy
             flag: TRIGGER_COMPILER_WARNING
@@ -116,7 +116,7 @@ jobs:
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
             passes: 0
-          - name: gcc-debug-libcpp
+          - name: gcc-debug-stdlib
             devcontainer: gcc-debug
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
@@ -137,7 +137,7 @@ jobs:
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
             passes: 1
-          - name: gcc-release-libcpp
+          - name: gcc-release-stdlib
             devcontainer: gcc-release
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
@@ -158,7 +158,7 @@ jobs:
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
             passes: 0
-          - name: gcc-test-libcpp
+          - name: gcc-test-stdlib
             devcontainer: gcc-test
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
@@ -196,7 +196,7 @@ jobs:
           configFile: .devcontainer/${{ matrix.devcontainer }}/devcontainer.json
           runCmd: "ctest --output-on-failure --test-dir $BUILD_DIR"
 
-      - name: Run tests successfully
+      - name: Run tests unsuccessfully
         if: ${{ ! matrix.passes }}
         uses: devcontainers/ci@v0.3
         with:

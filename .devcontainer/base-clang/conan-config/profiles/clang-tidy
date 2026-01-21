@@ -6,6 +6,6 @@ compiler.cppstd=gnu26
 compiler.libcxx=libc++
 
 [conf]
-!&:tools.build:cxxflags=["-fsanitize-trap", "-fsanitize=address,undefined"]
-&:tools.build:cxxflags=["-fsanitize-trap", "-fsanitize=address,undefined", "-Wall", "-Werror", "-Wextra"]
+!&:tools.build:cxxflags=["-D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_FAST", "-fsanitize-trap", "-fsanitize=address,undefined"]
+&:tools.build:cxxflags=["-D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_FAST", "-fsanitize-trap", "-fsanitize=address,undefined", "-Wall", "-Werror", "-Wextra"]
 tools.cmake.cmaketoolchain:generator=Ninja
