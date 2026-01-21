@@ -4,5 +4,13 @@
     "build": {
         "dockerfile": "${localWorkspaceFolder}/.devcontainer/base-clang/Dockerfile",
         "context": "${localWorkspaceFolder}"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cmake-tools",
+                "ms-vscode.cpptools"
+            ]
+        }
     }
 }
