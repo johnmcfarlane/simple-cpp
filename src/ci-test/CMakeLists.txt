@@ -3,6 +3,11 @@ if ($ENV{TRIGGER_CCG_VIOLATION})
   add_test(trigger.cppcoreguidelines-avoid-goto trigger.cppcoreguidelines-avoid-goto)
 endif ()
 
+if ($ENV{TRIGGER_MT_BUG})
+  add_executable(trigger.data-race trigger.data-race.cpp)
+  add_test(trigger.data-race trigger.data-race)
+endif ()
+
 if ($ENV{TRIGGER_INTEGER_BUG})
   add_executable(trigger.integer-overflow trigger.integer-overflow.cpp)
   add_test(trigger.integer-overflow trigger.integer-overflow)

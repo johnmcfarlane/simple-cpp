@@ -1,0 +1,37 @@
+// built with Clang; optimized for detecting thread bugs
+{
+    "name": "Clang test TSan",
+    "build": {
+        "dockerfile": "${localWorkspaceFolder}/.devcontainer/Dockerfile",
+        "args": {
+            "base_image": "base-clang",
+            "base_image_version": "5",
+            "profile": "clang-test-tsan"
+        },
+        "context": "${localWorkspaceFolder}"
+    },
+    "remoteUser": "root",
+    "runArgs": [
+        "--privileged"
+    ],
+    "postCreateCommand": {
+        "configure build system": [
+            "cmake",
+            "--toolchain", "/tmp/build/conan_toolchain.cmake",
+            "-B", "/tmp/build",
+            "-DCMAKE_BUILD_TYPE=Debug",
+            "-DCMAKE_PREFIX_PATH=/tmp/build",
+            "-G", "Ninja",
+            "-S", ".",
+            "-DCMAKE_CXX_STDLIB_MODULES_JSON=/usr/lib/llvm-22/lib/libc++.modules.json"
+        ]
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cmake-tools",
+                "ms-vscode.cpptools"
+            ]
+        }
+    }
+}

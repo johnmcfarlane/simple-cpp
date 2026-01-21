@@ -31,6 +31,10 @@ jobs:
             compiles: 1
             passes: 0
           - devcontainer: clang-debug
+            flag: TRIGGER_MT_BUG
+            compiles: 1
+            passes: 1
+          - devcontainer: clang-debug
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
             passes: 0
@@ -45,6 +49,10 @@ jobs:
             passes: 1
           - devcontainer: clang-release
             flag: TRIGGER_INTEGER_BUG
+            compiles: 1
+            passes: 1
+          - devcontainer: clang-release
+            flag: TRIGGER_MT_BUG
             compiles: 1
             passes: 1
           - devcontainer: clang-release
@@ -65,6 +73,10 @@ jobs:
             compiles: 1
             passes: 0
           - devcontainer: clang-test
+            flag: TRIGGER_MT_BUG
+            compiles: 1
+            passes: 1
+          - devcontainer: clang-test
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
             passes: 0
@@ -73,6 +85,27 @@ jobs:
             compiles: 0
             passes: 0
 
+          - devcontainer: clang-test-tsan
+            flag: TRIGGER_CCG_VIOLATION
+            compiles: 1
+            passes: 1
+          - devcontainer: clang-test-tsan
+            flag: TRIGGER_INTEGER_BUG
+            compiles: 1
+            passes: 1
+          - devcontainer: clang-test-tsan
+            flag: TRIGGER_MT_BUG
+            compiles: 1
+            passes: 0
+          - devcontainer: clang-test-tsan
+            flag: TRIGGER_STDLIB_BUG
+            compiles: 1
+            passes: 1
+          - devcontainer: clang-test-tsan
+            flag: TRIGGER_COMPILER_WARNING
+            compiles: 0
+            passes: 0
+
           - devcontainer: clang-tidy
             flag: TRIGGER_CCG_VIOLATION
             compiles: 0
@@ -81,6 +114,10 @@ jobs:
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
             passes: 0
+          - devcontainer: clang-tidy
+            flag: TRIGGER_MT_BUG
+            compiles: 1
+            passes: 1
           - devcontainer: clang-tidy
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
@@ -99,6 +136,10 @@ jobs:
             compiles: 1
             passes: 0
           - devcontainer: gcc-debug
+            flag: TRIGGER_MT_BUG
+            compiles: 1
+            passes: 1
+          - devcontainer: gcc-debug
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
             passes: 0
@@ -113,6 +154,10 @@ jobs:
             passes: 1
           - devcontainer: gcc-release
             flag: TRIGGER_INTEGER_BUG
+            compiles: 1
+            passes: 1
+          - devcontainer: gcc-release
+            flag: TRIGGER_MT_BUG
             compiles: 1
             passes: 1
           - devcontainer: gcc-release
@@ -132,6 +177,10 @@ jobs:
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
             passes: 0
+          - devcontainer: gcc-test
+            flag: TRIGGER_MT_BUG
+            compiles: 1
+            passes: 1
           - devcontainer: gcc-test
             flag: TRIGGER_STDLIB_BUG
             compiles: 1

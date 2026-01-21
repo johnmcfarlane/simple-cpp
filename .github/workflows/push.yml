@@ -56,6 +56,7 @@ jobs:
           - name: clang-debug
           - name: clang-release
           - name: clang-test
+          - name: clang-test-tsan
           - name: clang-tidy
           - name: gcc-debug
           - name: gcc-release
