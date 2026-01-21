@@ -1,0 +1,11 @@
+include(default)
+
+[settings]
+build_type=Debug
+compiler.cppstd=gnu26
+compiler.libcxx=libc++
+
+[conf]
+!&:tools.build:cxxflags=["-fno-sanitize-recover=all", "-fsanitize=thread"]
+&:tools.build:cxxflags=["-fno-sanitize-recover=all", "-fsanitize=thread", "-Wall", "-Werror", "-Wextra"]
+tools.cmake.cmaketoolchain:generator=Ninja
