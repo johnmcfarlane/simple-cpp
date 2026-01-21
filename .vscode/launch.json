@@ -8,7 +8,7 @@
         "type": "cppdbg",
         "request": "launch",
         "preLaunchTask": "build",
-        "program": "${env:BUILD_DIR}/src/provocative/trigger.unused-label",
+        "program": "${env:BUILD_DIR}/src/simple.unit-test",
         "args": [],
         "stopAtEntry": false,
         "cwd": "${env:BUILD_DIR}",
