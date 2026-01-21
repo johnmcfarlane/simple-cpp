@@ -3,6 +3,9 @@
     "name": "Build Clang image",
     "build": {
         "dockerfile": "${localWorkspaceFolder}/.devcontainer/base-clang/Dockerfile",
+        "args": {
+            "image_version": "main"
+        },
         "context": "${localWorkspaceFolder}",
         "options": ["--progress=plain"]
     }
