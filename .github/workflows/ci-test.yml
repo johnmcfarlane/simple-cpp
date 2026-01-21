@@ -22,149 +22,121 @@ jobs:
     strategy:
       matrix:
         include:
-          - name: clang-debug-ccg
-            devcontainer: clang-debug
+          - devcontainer: clang-debug
             flag: TRIGGER_CCG_VIOLATION
             compiles: 1
             passes: 1
-          - name: clang-debug-sanitizer
-            devcontainer: clang-debug
+          - devcontainer: clang-debug
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
             passes: 0
-          - name: clang-debug-stdlib
-            devcontainer: clang-debug
+          - devcontainer: clang-debug
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
             passes: 0
-          - name: clang-debug-warning
-            devcontainer: clang-debug
+          - devcontainer: clang-debug
             flag: TRIGGER_COMPILER_WARNING
             compiles: 0
             passes: 0
 
-          - name: clang-release-ccg
-            devcontainer: clang-release
+          - devcontainer: clang-release
             flag: TRIGGER_CCG_VIOLATION
             compiles: 1
             passes: 1
-          - name: clang-release-sanitizer
-            devcontainer: clang-release
+          - devcontainer: clang-release
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
             passes: 1
-          - name: clang-release-stdlib
-            devcontainer: clang-release
+          - devcontainer: clang-release
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
             passes: 1
-          - name: clang-release-warning
-            devcontainer: clang-release
+          - devcontainer: clang-release
             flag: TRIGGER_COMPILER_WARNING
             compiles: 1
             passes: 1 
 
-          - name: clang-test-ccg
-            devcontainer: clang-test
+          - devcontainer: clang-test
             flag: TRIGGER_CCG_VIOLATION
             compiles: 1
             passes: 1
-          - name: clang-test-sanitizer
-            devcontainer: clang-test
+          - devcontainer: clang-test
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
             passes: 0
-          - name: clang-test-stdlib
-            devcontainer: clang-test
+          - devcontainer: clang-test
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
             passes: 0
-          - name: clang-test-warning
-            devcontainer: clang-test
+          - devcontainer: clang-test
             flag: TRIGGER_COMPILER_WARNING
             compiles: 0
             passes: 0
 
-          - name: clang-tidy-ccg
-            devcontainer: clang-tidy
+          - devcontainer: clang-tidy
             flag: TRIGGER_CCG_VIOLATION
             compiles: 0
             passes: 0
-          - name: clang-tidy-sanitizer
-            devcontainer: clang-tidy
+          - devcontainer: clang-tidy
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
             passes: 0
-          - name: clang-tidy-stdlib
-            devcontainer: clang-tidy
+          - devcontainer: clang-tidy
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
             passes: 0
-          - name: clang-tidy-warning
-            devcontainer: clang-tidy
+          - devcontainer: clang-tidy
             flag: TRIGGER_COMPILER_WARNING
             compiles: 0
             passes: 0
 
-          - name: gcc-debug-ccg
-            devcontainer: gcc-debug
+          - devcontainer: gcc-debug
             flag: TRIGGER_CCG_VIOLATION
             compiles: 1
             passes: 1
-          - name: gcc-debug-sanitizer
-            devcontainer: gcc-debug
+          - devcontainer: gcc-debug
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
             passes: 0
-          - name: gcc-debug-stdlib
-            devcontainer: gcc-debug
+          - devcontainer: gcc-debug
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
             passes: 0
-          - name: gcc-debug-warning
-            devcontainer: gcc-debug
+          - devcontainer: gcc-debug
             flag: TRIGGER_COMPILER_WARNING
             compiles: 0
             passes: 0
 
-          - name: gcc-release-ccg
-            devcontainer: gcc-release
+          - devcontainer: gcc-release
             flag: TRIGGER_CCG_VIOLATION
             compiles: 1
             passes: 1
-          - name: gcc-release-sanitizer
-            devcontainer: gcc-release
+          - devcontainer: gcc-release
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
             passes: 1
-          - name: gcc-release-stdlib
-            devcontainer: gcc-release
+          - devcontainer: gcc-release
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
             passes: 1
-          - name: gcc-release-warning
-            devcontainer: gcc-release
+          - devcontainer: gcc-release
             flag: TRIGGER_COMPILER_WARNING
             compiles: 1
             passes: 1
 
-          - name: gcc-test-ccg
-            devcontainer: gcc-test
+          - devcontainer: gcc-test
             flag: TRIGGER_CCG_VIOLATION
             compiles: 1
             passes: 1
-          - name: gcc-test-sanitizer
-            devcontainer: gcc-test
+          - devcontainer: gcc-test
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
             passes: 0
-          - name: gcc-test-stdlib
-            devcontainer: gcc-test
+          - devcontainer: gcc-test
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
             passes: 0
-          - name: gcc-test-warning
-            devcontainer: gcc-test
+          - devcontainer: gcc-test
             flag: TRIGGER_COMPILER_WARNING
             compiles: 0
             passes: 0
