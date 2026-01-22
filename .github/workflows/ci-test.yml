@@ -18,6 +18,9 @@ jobs:
   tests:
     name: CI test
     runs-on: ubuntu-latest
+    env:
+      image_tag: 1
+      PROJECT_SUBDIRECTORY: ".github/workflows/ci-test/"
 
     strategy:
       matrix:
@@ -208,6 +211,7 @@ jobs:
           configFile: .devcontainer/${{ matrix.devcontainer }}/devcontainer.json
           env: ${{ matrix.flag }}=1
           imageName: ghcr.io/johnmcfarlane/simple-cpp/ci-test-${{ matrix.devcontainer }}
+          imageTag: ${{ env.image_tag }}
           runCmd: "cmake --build $BUILD_DIR"
 
       - name: Build unsuccessful tests
@@ -216,6 +220,8 @@ jobs:
         with:
           configFile: .devcontainer/${{ matrix.devcontainer }}/devcontainer.json
           env: ${{ matrix.flag }}=1
+          imageName: ghcr.io/johnmcfarlane/simple-cpp/ci-test-${{ matrix.devcontainer }}
+          imageTag: ${{ env.image_tag }}
           runCmd: "! cmake --build $BUILD_DIR"
 
       - name: Run tests successfully
@@ -223,6 +229,8 @@ jobs:
         uses: devcontainers/ci@v0.3
         with:
           configFile: .devcontainer/${{ matrix.devcontainer }}/devcontainer.json
+          imageName: ghcr.io/johnmcfarlane/simple-cpp/ci-test-${{ matrix.devcontainer }}
+          imageTag: ${{ env.image_tag }}
           runCmd: "ctest --output-on-failure --test-dir $BUILD_DIR"
 
       - name: Run tests unsuccessfully
@@ -230,4 +238,6 @@ jobs:
         uses: devcontainers/ci@v0.3
         with:
           configFile: .devcontainer/${{ matrix.devcontainer }}/devcontainer.json
+          imageName: ghcr.io/johnmcfarlane/simple-cpp/ci-test-${{ matrix.devcontainer }}
+          imageTag: ${{ env.image_tag }}
           runCmd: "! ctest --output-on-failure --test-dir $BUILD_DIR"

@@ -18,7 +18,7 @@
             "-DCMAKE_BUILD_TYPE=Release",
             "-DCMAKE_PREFIX_PATH=/tmp/build",
             "-G", "Ninja",
-            "-S", "."
+            "-S", "${localEnv:PROJECT_SUBDIRECTORY:.}"
         ]
     },
     "customizations": {
