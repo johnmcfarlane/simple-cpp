@@ -2,7 +2,7 @@ include(default)
 
 [settings]
 build_type=Debug
-compiler.cppstd=gnu26
+compiler.cppstd=26
 
 [conf]
 !&:tools.build:cxxflags=["-D_GLIBCXX_ASSERTIONS=1", "-fsanitize-trap", "-fsanitize=address,undefined"]
