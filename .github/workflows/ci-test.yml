@@ -44,6 +44,22 @@ jobs:
             flag: TRIGGER_COMPILER_WARNING
             compiles: 0
 
+          - devcontainer: clang-test-fuzzer
+            flag: TRIGGER_CCG_VIOLATION
+            compiles: 1
+          - devcontainer: clang-test-fuzzer
+            flag: TRIGGER_MT_BUG
+            compiles: 1
+          - devcontainer: clang-test-fuzzer
+            flag: TRIGGER_INTEGER_BUG
+            compiles: 1
+          - devcontainer: clang-test-fuzzer
+            flag: TRIGGER_STDLIB_BUG
+            compiles: 1
+          - devcontainer: clang-test-fuzzer
+            flag: TRIGGER_COMPILER_WARNING
+            compiles: 1
+
           - devcontainer: clang-test-tsan
             flag: TRIGGER_MT_BUG
             compiles: 1
