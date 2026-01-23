@@ -1,4 +1,5 @@
-import std;
+#include <print>
+#include <thread>
 
 auto main() noexcept(false) -> int
 {

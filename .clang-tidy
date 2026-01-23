@@ -1,15 +1,14 @@
 ---
-# TODO: Re-enable readability-redundant-declaration once modules support is more mature.
 Checks: >
   *,
   -altera-*,
   -cppcoreguidelines-pro-bounds-avoid-unchecked-container-access,
   -fuchsia-trailing-return,
   -google-readability-namespace-comments,
+  -llvm-header-guard,
   -llvm-namespace-comment,
   -llvmlibc-*,
   -misc-include-cleaner,
-  -readability-redundant-declaration,
 WarningsAsErrors:
   - '*'
 HeaderFileExtensions:
@@ -24,7 +23,6 @@ ImplementationFileExtensions:
   - cpp
   - cxx
 HeaderFilterRegex: '.*'
-ExcludeHeaderFilterRegex: '/usr/' # TODO: Remove this once modules support is more mature.
 CheckOptions:
   modernize-use-trailing-return-type.TransformLambdas: none
 SystemHeaders: false
