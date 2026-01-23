@@ -19,6 +19,8 @@ jobs:
         include:
           - name: base-clang-libcpp
             version: 2026-02-07
+          - name: base-clang-libstdcpp
+            version: 2026-02-07
           - name: base-gcc
             version: 9d9663ea153
 
@@ -58,6 +60,7 @@ jobs:
           - name: clang-libcpp-test
           - name: clang-libcpp-test-tsan
           - name: clang-libcpp-analyze
+          - name: clang-libstdcpp-test
           - name: gcc-debug
           - name: gcc-release
           - name: gcc-test

@@ -1,0 +1,12 @@
+// image with Clang nightly build and libstdc++
+{
+    "name": "build image Clang/libstdc++",
+    "build": {
+        "dockerfile": "${localWorkspaceFolder}/.devcontainer/base-clang-libstdcpp/Dockerfile",
+        "args": {
+            "base_image": "base-gcc",
+            "base_image_version": "9d9663ea153"
+        },
+        "context": "${localWorkspaceFolder}"
+    }
+}

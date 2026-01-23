@@ -1,0 +1,5 @@
+compiler:
+    clang:
+        version: ["22"]
+    gcc:
+        version: ["16"]

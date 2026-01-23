@@ -1,0 +1,34 @@
+// built with Clang; optimized for testing
+{
+    "name": "test Clang/libstdc++",
+    "build": {
+        "dockerfile": "${localWorkspaceFolder}/.devcontainer/Dockerfile",
+        "args": {
+            "base_image": "base-clang-libstdcpp",
+            "base_image_version": "2026-02-07",
+            "profile": "clang-libstdcpp-test"
+        },
+        "context": "${localWorkspaceFolder}"
+    },
+    "remoteUser": "root",
+    "postCreateCommand": {
+        "configure build system": [
+            "cmake",
+            "--toolchain", "/tmp/build/conan_toolchain.cmake",
+            "-B", "/tmp/build",
+            "-DCMAKE_BUILD_TYPE=Release",
+            "-DCMAKE_CXX_STDLIB_MODULES_JSON=/usr/local/lib64/libstdc++.modules.json",
+            "-DCMAKE_PREFIX_PATH=/tmp/build",
+            "-G", "Ninja",
+            "-S", "${localEnv:PROJECT_SUBDIRECTORY:.}"
+        ]
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cmake-tools",
+                "ms-vscode.cpptools"
+            ]
+        }
+    }
+}

@@ -64,6 +64,16 @@ jobs:
             flag: TRIGGER_COMPILER_WARNING
             compiles: 0
 
+          - devcontainer: clang-libstdcpp-test
+            flag: TRIGGER_INTEGER_BUG
+            compiles: 1
+          - devcontainer: clang-libstdcpp-test
+            flag: TRIGGER_STDLIB_BUG
+            compiles: 1
+          - devcontainer: clang-libstdcpp-test
+            flag: TRIGGER_COMPILER_WARNING
+            compiles: 0
+
           - devcontainer: gcc-debug
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
