@@ -9,9 +9,8 @@ on:
     paths:
       - .clang-tidy
       - .devcontainer/**
-      - .github/**
+      - .github/ci-test**
       - conanfile.txt
-      - src/ci-test/**
   workflow_dispatch:
 
 jobs:
