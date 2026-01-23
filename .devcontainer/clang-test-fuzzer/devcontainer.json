@@ -1,0 +1,35 @@
+// built with Clang; optimized for fuzz testing
+{
+    "name": "Clang fuzzer",
+    "build": {
+        "dockerfile": "${localWorkspaceFolder}/.devcontainer/Dockerfile",
+        "args": {
+            "base_image": "base-clang",
+            "base_image_version": "2026-03-13",
+            "profile": "clang-test-fuzzer"
+        },
+        "context": "${localWorkspaceFolder}",
+        "options": ["--progress=plain"]
+    },
+    "remoteUser": "root",
+    "postCreateCommand": {
+        "configure build system": [
+            "cmake",
+            "--toolchain", "/tmp/build/conan_toolchain.cmake",
+            "-B", "/tmp/build",
+            "-DCMAKE_BUILD_TYPE=Release",
+            "-DCMAKE_PREFIX_PATH=/tmp/build",
+            "-DENABLE_FUZZER=1",
+            "-G", "Ninja",
+            "-S", "${localEnv:PROJECT_SUBDIRECTORY:.}"
+        ]
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cmake-tools",
+                "ms-vscode.cpptools"
+            ]
+        }
+    }
+}

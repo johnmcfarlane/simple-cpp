@@ -45,6 +45,13 @@ jobs:
             trigger_ubsan: "TRUE"
             trigger_warning: "TRUE"
 
+          - devcontainer: clang-test-fuzzer
+            trigger_clang_tidy: "FALSE"
+            trigger_stdlib: "TRUE"
+            trigger_tsan: "FALSE"
+            trigger_ubsan: "TRUE"
+            trigger_warning: "TRUE"
+
           - devcontainer: clang-test-tsan
             trigger_clang_tidy: "FALSE"
             trigger_stdlib: "FALSE"
