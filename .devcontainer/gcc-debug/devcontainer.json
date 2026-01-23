@@ -1,6 +1,6 @@
 // built with GCC; optimized for debugging
 {
-    "name": "GCC debug",
+    "name": "test GCC/libstdc++ debug",
     "build": {
         "dockerfile": "${localWorkspaceFolder}/.devcontainer/Dockerfile",
         "args": {

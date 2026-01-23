@@ -24,43 +24,43 @@ jobs:
     strategy:
       matrix:
         include:
-          - devcontainer: clang-debug
+          - devcontainer: clang-libcpp-debug
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
-          - devcontainer: clang-debug
+          - devcontainer: clang-libcpp-debug
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
-          - devcontainer: clang-debug
+          - devcontainer: clang-libcpp-debug
             flag: TRIGGER_COMPILER_WARNING
             compiles: 0
 
-          - devcontainer: clang-test
+          - devcontainer: clang-libcpp-test
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
-          - devcontainer: clang-test
+          - devcontainer: clang-libcpp-test
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
-          - devcontainer: clang-test
+          - devcontainer: clang-libcpp-test
             flag: TRIGGER_COMPILER_WARNING
             compiles: 0
 
-          - devcontainer: clang-test-tsan
+          - devcontainer: clang-libcpp-test-tsan
             flag: TRIGGER_MT_BUG
             compiles: 1
-          - devcontainer: clang-test-tsan
+          - devcontainer: clang-libcpp-test-tsan
             flag: TRIGGER_COMPILER_WARNING
             compiles: 0
 
-          - devcontainer: clang-tidy
+          - devcontainer: clang-libcpp-analyze
             flag: TRIGGER_CCG_VIOLATION
             compiles: 0
-          - devcontainer: clang-tidy
+          - devcontainer: clang-libcpp-analyze
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
-          - devcontainer: clang-tidy
+          - devcontainer: clang-libcpp-analyze
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
-          - devcontainer: clang-tidy
+          - devcontainer: clang-libcpp-analyze
             flag: TRIGGER_COMPILER_WARNING
             compiles: 0
 

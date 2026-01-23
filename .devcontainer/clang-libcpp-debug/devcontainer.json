@@ -1,12 +1,12 @@
-// built with Clang; optimized for testing
+// built with Clang; optimized for debugging
 {
-    "name": "Clang test",
+    "name": "test Clang/libc++ debug",
     "build": {
         "dockerfile": "${localWorkspaceFolder}/.devcontainer/Dockerfile",
         "args": {
-            "base_image": "base-clang",
-            "base_image_version": "2026-02-03",
-            "profile": "clang-test"
+            "base_image": "base-clang-libcpp",
+            "base_image_version": "2026-02-07",
+            "profile": "clang-libcpp-debug"
         },
         "context": "${localWorkspaceFolder}"
     },
@@ -16,7 +16,7 @@
             "cmake",
             "--toolchain", "/tmp/build/conan_toolchain.cmake",
             "-B", "/tmp/build",
-            "-DCMAKE_BUILD_TYPE=Release",
+            "-DCMAKE_BUILD_TYPE=Debug",
             "-DCMAKE_PREFIX_PATH=/tmp/build",
             "-G", "Ninja",
             "-S", "${localEnv:PROJECT_SUBDIRECTORY:.}",

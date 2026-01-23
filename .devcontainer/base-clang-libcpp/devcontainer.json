@@ -1,0 +1,8 @@
+// image with Clang nightly build and libc++
+{
+    "name": "build image Clang/libc++",
+    "build": {
+        "dockerfile": "${localWorkspaceFolder}/.devcontainer/base-clang-libcpp/Dockerfile",
+        "context": "${localWorkspaceFolder}"
+    }
+}

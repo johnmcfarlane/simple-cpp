@@ -1,8 +1,8 @@
 // check formatting
 {
-    "name": "Lint",
+    "name": "lint",
     "build": {
-        "dockerfile": "${localWorkspaceFolder}/.devcontainer/base-clang/Dockerfile",
+        "dockerfile": "${localWorkspaceFolder}/.devcontainer/base-clang-libcpp/Dockerfile",
         "context": "${localWorkspaceFolder}"
     },
     "customizations": {

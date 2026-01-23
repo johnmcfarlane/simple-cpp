@@ -1,12 +1,12 @@
-// built with Clang; optimized for production
+// built with Clang; analyzed with Clang-Tidy
 {
-    "name": "Clang release",
+    "name": "test Clang/libc++ Clang-Tidy",
     "build": {
         "dockerfile": "${localWorkspaceFolder}/.devcontainer/Dockerfile",
         "args": {
-            "base_image": "base-clang",
-            "base_image_version": "2026-02-03",
-            "profile": "clang-release"
+            "base_image": "base-clang-libcpp",
+            "base_image_version": "2026-02-07",
+            "profile": "clang-libcpp-analyze"
         },
         "context": "${localWorkspaceFolder}"
     },
@@ -20,7 +20,8 @@
             "-DCMAKE_PREFIX_PATH=/tmp/build",
             "-G", "Ninja",
             "-S", "${localEnv:PROJECT_SUBDIRECTORY:.}",
-            "-DCMAKE_CXX_STDLIB_MODULES_JSON=/usr/lib/llvm-22/lib/libc++.modules.json"
+            "-DCMAKE_CXX_STDLIB_MODULES_JSON=/usr/lib/llvm-22/lib/libc++.modules.json",
+            "-DCMAKE_CXX_CLANG_TIDY=clang-tidy"
         ]
     },
     "customizations": {

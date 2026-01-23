@@ -17,8 +17,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - name: base-clang
-            version: 2026-02-03
+          - name: base-clang-libcpp
+            version: 2026-02-07
           - name: base-gcc
             version: 9d9663ea153
 
@@ -53,11 +53,11 @@ jobs:
     strategy:
       matrix:
         include:
-          - name: clang-debug
-          - name: clang-release
-          - name: clang-test
-          - name: clang-test-tsan
-          - name: clang-tidy
+          - name: clang-libcpp-debug
+          - name: clang-libcpp-release
+          - name: clang-libcpp-test
+          - name: clang-libcpp-test-tsan
+          - name: clang-libcpp-analyze
           - name: gcc-debug
           - name: gcc-release
           - name: gcc-test
@@ -105,5 +105,5 @@ jobs:
         uses: devcontainers/ci@v0.3
         with:
           configFile: .devcontainer/lint/devcontainer.json
-          imageName: ghcr.io/johnmcfarlane/simple-cpp/base-clang
+          imageName: ghcr.io/johnmcfarlane/simple-cpp/base-clang-libcpp
           runCmd: .devcontainer/lint/lint

@@ -1,6 +1,6 @@
 // built with GCC; optimized for production
 {
-    "name": "GCC release",
+    "name": "test GCC/libstdc++ release",
     "build": {
         "dockerfile": "${localWorkspaceFolder}/.devcontainer/Dockerfile",
         "args": {

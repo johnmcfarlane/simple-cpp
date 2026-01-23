@@ -1,25 +1,22 @@
-// built with Clang; optimized for detecting thread bugs
+// built with Clang; optimized for production
 {
-    "name": "Clang test TSan",
+    "name": "test Clang/libc++ release",
     "build": {
         "dockerfile": "${localWorkspaceFolder}/.devcontainer/Dockerfile",
         "args": {
-            "base_image": "base-clang",
-            "base_image_version": "2026-02-03",
-            "profile": "clang-test-tsan"
+            "base_image": "base-clang-libcpp",
+            "base_image_version": "2026-02-07",
+            "profile": "clang-libcpp-release"
         },
         "context": "${localWorkspaceFolder}"
     },
     "remoteUser": "root",
-    "runArgs": [
-        "--privileged"
-    ],
     "postCreateCommand": {
         "configure build system": [
             "cmake",
             "--toolchain", "/tmp/build/conan_toolchain.cmake",
             "-B", "/tmp/build",
-            "-DCMAKE_BUILD_TYPE=Debug",
+            "-DCMAKE_BUILD_TYPE=Release",
             "-DCMAKE_PREFIX_PATH=/tmp/build",
             "-G", "Ninja",
             "-S", "${localEnv:PROJECT_SUBDIRECTORY:.}",

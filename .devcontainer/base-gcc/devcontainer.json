@@ -1,6 +1,6 @@
 // image with GCC trunk build
 {
-    "name": "Build GCC image",
+    "name": "build image GCC/libstdc++",
     "build": {
         "dockerfile": "${localWorkspaceFolder}/.devcontainer/base-gcc/Dockerfile",
         "args": {

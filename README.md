@@ -28,5 +28,5 @@ Basic VS Code tasks are provided to build and test the software. To build and te
 1. Follow the [VS Code Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers#installation) instructions.
 1. Connect to the Internet.
 1. Run command, "Dev Containers: Open Folder in Container..." and select [the project directory](.).
-1. Choose the [GCC test](.devcontainer/gcc-test/devcontainer.json) dev container.
+1. Choose the [test GCC/libstdc++](.devcontainer/gcc-test/devcontainer.json) dev container.
 1. Run command, "Tasks: Run Test Task".
