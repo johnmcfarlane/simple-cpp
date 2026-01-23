@@ -7,5 +7,5 @@ compiler.libcxx=libc++
 
 [conf]
 !&:tools.build:cxxflags=["-D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_DEBUG", "-fno-sanitize-recover=all", "-fsanitize=address,undefined"]
-&:tools.build:cxxflags=["-D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_DEBUG", "-fno-sanitize-recover=all", "-fsanitize=address,undefined", "-Wall", "-Werror", "-Wextra"]
+&:tools.build:cxxflags=["-D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_DEBUG", "-fno-sanitize-recover=all", "-fsanitize=address,undefined", "-g", "-Wall", "-Werror", "-Wextra"]
 tools.cmake.cmaketoolchain:generator=Ninja

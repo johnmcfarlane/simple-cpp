@@ -6,5 +6,5 @@ compiler.cppstd=gnu26
 
 [conf]
 !&:tools.build:cxxflags=["-D_GLIBCXX_ASSERTIONS=1", "-fsanitize-trap", "-fsanitize=address,undefined"]
-&:tools.build:cxxflags=["-D_GLIBCXX_ASSERTIONS=1", "-fsanitize-trap", "-fsanitize=address,undefined", "-Wall", "-Werror", "-Wextra"]
+&:tools.build:cxxflags=["-D_GLIBCXX_ASSERTIONS=1", "-fsanitize-trap", "-fsanitize=address,undefined", "-g", "-Wall", "-Werror", "-Wextra"]
 tools.cmake.cmaketoolchain:generator=Ninja
