@@ -1,0 +1,11 @@
+include(default)
+
+[settings]
+build_type=Release
+compiler.cppstd=gnu26
+compiler.libcxx=libc++
+
+[conf]
+!&:tools.build:cxxflags=["-fsanitize-trap", "-fsanitize=address,undefined"]
+&:tools.build:cxxflags=["-fsanitize-trap", "-fsanitize=address,undefined", "-Wall", "-Werror", "-Wextra"]
+tools.cmake.cmaketoolchain:generator=Ninja
