@@ -5,7 +5,7 @@
         "dockerfile": "${localWorkspaceFolder}/.devcontainer/Dockerfile",
         "args": {
             "base_image": "base-clang",
-            "base_image_version": "5",
+            "base_image_version": "2026-02-03",
             "profile": "clang-test-tsan"
         },
         "context": "${localWorkspaceFolder}"

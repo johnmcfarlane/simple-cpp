@@ -18,9 +18,9 @@ jobs:
       matrix:
         include:
           - name: base-clang
-            tag: 5
+            version: 2026-02-03
           - name: base-gcc
-            tag: 2
+            version: 9d9663ea153
 
     steps:
       - name: Check out code
@@ -38,7 +38,7 @@ jobs:
         with:
           configFile: .devcontainer/${{ matrix.name }}/devcontainer.json
           imageName: ghcr.io/johnmcfarlane/simple-cpp/${{ matrix.name }}
-          imageTag: ${{ matrix.tag }}
+          imageTag: ${{ matrix.version }}
           runCmd: |
             which conan
             conan --version
