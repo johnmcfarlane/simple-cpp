@@ -1,5 +1,5 @@
 ---
-name: push
+name: 'C++ test'
 
 on:
   push:

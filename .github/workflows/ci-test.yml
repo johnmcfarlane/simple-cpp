@@ -7,10 +7,10 @@ on:
     branches:
       - '**'
     paths:
-      - .clang-tidy
-      - .devcontainer/**
-      - .github/ci-test**
-      - conanfile.txt
+      - '.clang-tidy'
+      - '.devcontainer/**'
+      - '.github/ci-test**'
+      - 'conanfile.txt'
   workflow_dispatch:
 
 jobs:
