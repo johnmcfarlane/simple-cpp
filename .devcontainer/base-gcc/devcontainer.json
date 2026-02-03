@@ -3,6 +3,9 @@
     "name": "Build GCC image",
     "build": {
         "dockerfile": "${localWorkspaceFolder}/.devcontainer/base-gcc/Dockerfile",
+        "args": {
+            "image_version": "9d9663ea153"
+        },
         "context": "${localWorkspaceFolder}"
     }
 }

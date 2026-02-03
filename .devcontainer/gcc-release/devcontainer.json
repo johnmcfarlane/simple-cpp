@@ -5,7 +5,7 @@
         "dockerfile": "${localWorkspaceFolder}/.devcontainer/Dockerfile",
         "args": {
             "base_image": "base-gcc",
-            "base_image_version": "2",
+            "base_image_version": "9d9663ea153",
             "profile": "gcc-release"
         },
         "context": "${localWorkspaceFolder}"
