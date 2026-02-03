@@ -1,5 +1,8 @@
 FROM mcr.microsoft.com/devcontainers/base:trixie
 
+# TODO: remove once https://github.com/llvm/llvm-project/issues/153385 is resolved
+RUN sed -i 's/\(sha1\.second_preimage_resistance =\).*/\1 9999-01-01/' /usr/share/apt/default-sequoia.config
+
 RUN wget https://apt.llvm.org/llvm.sh \
   && chmod +x llvm.sh \
   && ./llvm.sh 22 \
