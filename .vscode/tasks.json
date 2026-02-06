@@ -11,6 +11,9 @@
                 "kind": "build",
                 "isDefault": true
             },
+            "presentation": {
+                "clear": true,
+            },
         },
         {
             "label": "clean",
@@ -18,6 +21,9 @@
             "command": "cmake --build ${env:BUILD_DIR} --target clean",
             "group": {
                 "kind": "build",
+            },
+            "presentation": {
+                "clear": true,
             },
         },
         {
@@ -28,7 +34,10 @@
             "group": {
                 "kind": "test",
                 "isDefault": true
-            }
+            },
+            "presentation": {
+                "clear": true,
+            },
         },
     ]
 }
