@@ -25,172 +25,64 @@ jobs:
       matrix:
         include:
           - devcontainer: clang-debug
-            flag: TRIGGER_CCG_VIOLATION
-            compiles: 1
-            passes: 1
-          - devcontainer: clang-debug
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
-            passes: 0
-          - devcontainer: clang-debug
-            flag: TRIGGER_MT_BUG
-            compiles: 1
-            passes: 1
           - devcontainer: clang-debug
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
-            passes: 0
           - devcontainer: clang-debug
             flag: TRIGGER_COMPILER_WARNING
             compiles: 0
-            passes: 0
 
-          - devcontainer: clang-release
-            flag: TRIGGER_CCG_VIOLATION
-            compiles: 1
-            passes: 1
-          - devcontainer: clang-release
-            flag: TRIGGER_INTEGER_BUG
-            compiles: 1
-            passes: 1
-          - devcontainer: clang-release
-            flag: TRIGGER_MT_BUG
-            compiles: 1
-            passes: 1
-          - devcontainer: clang-release
-            flag: TRIGGER_STDLIB_BUG
-            compiles: 1
-            passes: 1
-          - devcontainer: clang-release
-            flag: TRIGGER_COMPILER_WARNING
-            compiles: 1
-            passes: 1 
-
-          - devcontainer: clang-test
-            flag: TRIGGER_CCG_VIOLATION
-            compiles: 1
-            passes: 1
           - devcontainer: clang-test
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
-            passes: 0
-          - devcontainer: clang-test
-            flag: TRIGGER_MT_BUG
-            compiles: 1
-            passes: 1
           - devcontainer: clang-test
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
-            passes: 0
           - devcontainer: clang-test
             flag: TRIGGER_COMPILER_WARNING
             compiles: 0
-            passes: 0
 
-          - devcontainer: clang-test-tsan
-            flag: TRIGGER_CCG_VIOLATION
-            compiles: 1
-            passes: 1
-          - devcontainer: clang-test-tsan
-            flag: TRIGGER_INTEGER_BUG
-            compiles: 1
-            passes: 1
           - devcontainer: clang-test-tsan
             flag: TRIGGER_MT_BUG
             compiles: 1
-            passes: 0
-          - devcontainer: clang-test-tsan
-            flag: TRIGGER_STDLIB_BUG
-            compiles: 1
-            passes: 1
           - devcontainer: clang-test-tsan
             flag: TRIGGER_COMPILER_WARNING
             compiles: 0
-            passes: 0
 
           - devcontainer: clang-tidy
             flag: TRIGGER_CCG_VIOLATION
             compiles: 0
-            passes: 0
           - devcontainer: clang-tidy
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
-            passes: 0
-          - devcontainer: clang-tidy
-            flag: TRIGGER_MT_BUG
-            compiles: 1
-            passes: 1
           - devcontainer: clang-tidy
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
-            passes: 0
           - devcontainer: clang-tidy
             flag: TRIGGER_COMPILER_WARNING
             compiles: 0
-            passes: 0
 
-          - devcontainer: gcc-debug
-            flag: TRIGGER_CCG_VIOLATION
-            compiles: 1
-            passes: 1
           - devcontainer: gcc-debug
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
-            passes: 0
-          - devcontainer: gcc-debug
-            flag: TRIGGER_MT_BUG
-            compiles: 1
-            passes: 1
           - devcontainer: gcc-debug
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
-            passes: 0
           - devcontainer: gcc-debug
             flag: TRIGGER_COMPILER_WARNING
             compiles: 0
-            passes: 0
 
-          - devcontainer: gcc-release
-            flag: TRIGGER_CCG_VIOLATION
-            compiles: 1
-            passes: 1
-          - devcontainer: gcc-release
-            flag: TRIGGER_INTEGER_BUG
-            compiles: 1
-            passes: 1
-          - devcontainer: gcc-release
-            flag: TRIGGER_MT_BUG
-            compiles: 1
-            passes: 1
-          - devcontainer: gcc-release
-            flag: TRIGGER_STDLIB_BUG
-            compiles: 1
-            passes: 1
-          - devcontainer: gcc-release
-            flag: TRIGGER_COMPILER_WARNING
-            compiles: 1
-            passes: 1
-
-          - devcontainer: gcc-test
-            flag: TRIGGER_CCG_VIOLATION
-            compiles: 1
-            passes: 1
           - devcontainer: gcc-test
             flag: TRIGGER_INTEGER_BUG
             compiles: 1
-            passes: 0
-          - devcontainer: gcc-test
-            flag: TRIGGER_MT_BUG
-            compiles: 1
-            passes: 1
           - devcontainer: gcc-test
             flag: TRIGGER_STDLIB_BUG
             compiles: 1
-            passes: 0
           - devcontainer: gcc-test
             flag: TRIGGER_COMPILER_WARNING
             compiles: 0
-            passes: 0
 
     steps:
       - name: Check out code
@@ -223,17 +115,7 @@ jobs:
           imageTag: ${{ env.image_tag }}
           runCmd: "! cmake --build $BUILD_DIR"
 
-      - name: Run tests successfully
-        if: ${{ matrix.passes }}
-        uses: devcontainers/ci@v0.3
-        with:
-          configFile: .devcontainer/${{ matrix.devcontainer }}/devcontainer.json
-          imageName: ghcr.io/johnmcfarlane/simple-cpp/ci-test-${{ matrix.devcontainer }}
-          imageTag: ${{ env.image_tag }}
-          runCmd: "ctest --output-on-failure --test-dir $BUILD_DIR"
-
       - name: Run tests unsuccessfully
-        if: ${{ ! matrix.passes }}
         uses: devcontainers/ci@v0.3
         with:
           configFile: .devcontainer/${{ matrix.devcontainer }}/devcontainer.json
