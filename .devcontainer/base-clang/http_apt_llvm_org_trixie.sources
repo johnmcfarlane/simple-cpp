@@ -1,0 +1,6 @@
+Types: deb
+Architectures: amd64 arm64
+Signed-By: /etc/apt/trusted.gpg.d/apt.llvm.org.asc
+URIs: http://apt.llvm.org/trixie/
+Suites: llvm-toolchain-trixie-22
+Components: main
