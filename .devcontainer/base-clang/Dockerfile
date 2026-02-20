@@ -1,13 +1,20 @@
 FROM mcr.microsoft.com/devcontainers/base:trixie
 
-# TODO: remove once https://github.com/llvm/llvm-project/issues/153385 is resolved
-RUN sed -i 's/\(sha1\.second_preimage_resistance =\).*/\1 9999-01-01/' /usr/share/apt/default-sequoia.config
+COPY .devcontainer/base-clang/http_apt_llvm_org_trixie.sources /etc/apt/sources.list.d/http_apt_llvm_org_trixie.sources
+RUN wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc
 
-RUN wget https://apt.llvm.org/llvm.sh \
-  && chmod +x llvm.sh \
-  && ./llvm.sh 22 \
-  && rm llvm.sh \
-  && apt-get install --no-install-recommends --quiet --yes clang-format-22 clang-tidy-22 gdb libc++-22-dev libc++abi-22-dev ninja-build python3-pip \
+RUN apt-get update \
+  && apt-get install --no-install-recommends --quiet --yes \
+      clang-22 \
+      clang-format-22 \
+      clang-tidy-22 \
+      gdb \
+      libc++-22-dev \
+      libc++abi-22-dev \
+      libclang-rt-22-dev \
+      libpolly-22-dev \
+      ninja-build \
+      python3-pip \
   && apt-get purge --yes gcc g++ \
   && apt-get --quiet --yes autoremove \
   && rm -rf /var/lib/apt/lists/*
