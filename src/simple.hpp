@@ -1,12 +1,8 @@
-module;
-
-export module simple;
-
-import std;
+#include <print>
 
 namespace simple
 {
-    export constexpr auto add(auto lhs, auto rhs)
+    constexpr auto add(auto lhs, auto rhs)
     {
         std::println("{} + {} = {}", lhs, rhs, lhs + rhs);
         return lhs + rhs;
