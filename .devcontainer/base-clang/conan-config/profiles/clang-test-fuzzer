@@ -1,0 +1,20 @@
+include(default)
+
+[settings]
+build_type=Release
+compiler.cppstd=gnu26
+compiler.libcxx=libstdc++
+
+[conf]
+!&:tools.build:cxxflags=["-fsanitize=fuzzer"]
+&:tools.build:cxxflags=["-fsanitize=fuzzer-no-link"]
+tools.cmake.cmaketoolchain:generator=Ninja
+
+[buildenv]
+# &:CXXFLAGS=-fsanitize=fuzzer
+# FUZZ_TEST_CXX_FLAGS=-fsanitize=fuzzer;-lc++abi
+#CMAKE_EXE_LINKER_FLAGS=-lstdc++
+FUZZ_TEST_CXX_FLAGS=-fsanitize=fuzzer
+# FUZZ_TEST_LINKER_FLAGS=-fsanitize=fuzzer;-lc++abi
+FUZZ_TEST_LINKER_FLAGS=
+# &:LDFLAGS=-lc++abi

@@ -8,7 +8,7 @@
         "type": "cppdbg",
         "request": "launch",
         "preLaunchTask": "build",
-        "program": "${env:BUILD_DIR}/src/simple.unit-test",
+        "program": "${env:BUILD_DIR}/src/simple.fuzz-test",
         "args": [],
         "stopAtEntry": false,
         "cwd": "${env:BUILD_DIR}",
