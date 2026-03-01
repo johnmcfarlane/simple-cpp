@@ -21,6 +21,6 @@ COPY .clang-tidy /
 
 # configure Conan
 ENV CONAN_HOME=/tmp/conan
-COPY .devcontainer/base-gcc/conan-config /tmp/conan-config
+COPY .devcontainer/conan-config /tmp/conan-config
 RUN conan config install /tmp/conan-config
 RUN conan profile detect --force

@@ -2,7 +2,6 @@ ARG base_image=error-missing-base_image-arg
 ARG base_image_version=error-missing-base_image_version-arg
 FROM ghcr.io/johnmcfarlane/simple-cpp/${base_image}:${base_image_version}
 
-ARG base_image
 ARG profile=error-missing-profile-arg
 ENV BUILD_DIR=/tmp/build
 
@@ -11,7 +10,7 @@ COPY .clang-tidy /
 
 # configure Conan
 ENV CONAN_HOME=/tmp/conan
-COPY .devcontainer/${base_image}/conan-config /tmp/conan-config
+COPY .devcontainer/conan-config /tmp/conan-config
 RUN conan config install /tmp/conan-config
 RUN conan profile detect --force
 
