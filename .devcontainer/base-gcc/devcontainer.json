@@ -6,6 +6,7 @@
         "args": {
             "image_version": "8db7ba7ffbf"
         },
-        "context": "${localWorkspaceFolder}"
+        "context": "${localWorkspaceFolder}",
+        "options": ["--progress=plain"]
     }
 }
