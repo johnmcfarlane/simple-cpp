@@ -8,7 +8,8 @@
             "base_image_version": "8db7ba7ffbf",
             "profile": "gcc-debug"
         },
-        "context": "${localWorkspaceFolder}"
+        "context": "${localWorkspaceFolder}",
+        "options": ["--progress=plain"]
     },
     "remoteUser": "root",
     "postCreateCommand": {
