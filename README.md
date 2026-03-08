@@ -1,32 +1,48 @@
-# Simple C++ Project Template
+# ???
 
-## Introduction
+```sh
+clang++ .github/workflows/ci-test/trigger.integer-overflow.cpp --stdlib=libc++ -lc++
+```
 
-### Requirements
+> clang++: error: unable to execute command: posix_spawn failed: No such file or directory
 
-A [Development Containers](https://containers.dev/)-based setup is supported and tested with the [VS Code Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension.
+```sh
+sudo apt-get purge --quiet --yes clang          g++       gcc       libc++-dev       libc++abi-dev
+sudo apt-get install       clang
+```
 
-View any [Dockerfile](.devcontainer/base-gcc/Dockerfile) for an example of system requirements, which include
+Don't autoremove clang or g++ or 
+Can auto-remove purge  libc++-dev       libc++abi-dev gcc g++
 
-* [Clang](https://clang.llvm.org/) 22 or [GCC](https://gcc.gnu.org/) 16
-* [Conan](https://conan.io/) 2.x
 
-and optionally:
+Clang 23:
+* /usr/local/bin/clang++
 
-* Clang-Tidy
-* Ninja
-* GDB
+Clang 19:
+* /usr/bin/clang++-19
 
-See [conanfile.txt](conanfile.txt) for software dependencies, which include:
+/usr/local/lib/x86_64-unknown-linux-gnu/libc++.modules.json
 
-* [Catch2](https://github.com/catchorg/Catch2) 3.12.0
+-I/usr/local/lib/x86_64-unknown-linux-gnu/../../share/libc++/v1
+-> /usr/local/share/libc++/v1
 
-## Instructions
+/usr/local/include/c++/v1/flat_map
 
-Basic VS Code tasks are provided to build and test the software. To build and test:
+"/usr/local/bin/clang-scan-deps" -format=p1689 -- /usr/bin/clang++  -I/usr/local/lib/x86_64-unknown-linux-gnu/../../share/libc++/v1 -m64 -stdlib=libc++ -D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_FAST -fsanitize-trap -fsanitize=address,undefined -g -Wall -Werror -Wextra -O3 -DNDEBUG -std=gnu++26 -Wno-reserved-module-identifier -x c++ /usr/local/share/libc++/v1/std.cppm -c -o CMakeFiles/__cmake_cxx26.dir/usr/local/share/libc++/v1/std.cppm.o -resource-dir "/usr/local/lib/clang/23" -MT CMakeFiles/__cmake_cxx26.dir/usr/local/share/libc++/v1/std.cppm.o.ddi -MD -MF CMakeFiles/__cmake_cxx26.dir/usr/local/share/libc++/v1/std.cppm.o.ddi.d > CMakeFiles/__cmake_cxx26.dir/usr/local/share/libc++/v1/std.cppm.o.ddi.tmp && mv CMakeFiles/__cmake_cxx26.dir/usr/local/share/libc++/v1/std.cppm.o.ddi.tmp CMakeFiles/__cmake_cxx26.dir/usr/local/share/libc++/v1/std.cppm.o.ddi
 
-1. Follow the [VS Code Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers#installation) instructions.
-1. Connect to the Internet.
-1. Run command, "Dev Containers: Open Folder in Container..." and select [the project directory](.).
-1. Choose the [GCC test](.devcontainer/gcc-test/devcontainer.json) dev container.
-1. Run command, "Tasks: Run Test Task".
+# ==============================
+
+/usr/local/share/libc++/v1/std.cppm:63:10: fatal error: 'flat_map' file not found
+
+From .devcontainer, /usr/local/lib/x86_64-unknown-linux-gnu/libc++.modules.json
+specifies include directory, ../../share/libc++/v1
+i.e. /usr/local/lib/x86_64-unknown-linux-gnu/../../share/libc++/v1
+i.e. /usr/local/share/libc++/v1
+
+but flat_map is in /usr/local/include/c++/v1/flat_map
+
+
+"/usr/local/bin/clang-scan-deps" -format=p1689 -- /usr/bin/clang++  -I/usr/local/lib/x86_64-unknown-linux-gnu/../../share/libc++/v1 -m64 -stdlib=libc++ -D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_DEBUG -fno-sanitize-recover=all -fsanitize=address,undefined -g -Wall -Werror -Wextra -O3 -DNDEBUG -std=gnu++26 -Wno-reserved-module-identifier -x c++ /usr/local/share/libc++/v1/std.cppm -c -o CMakeFiles/__cmake_cxx26.dir/usr/local/share/libc++/v1/std.cppm.o -resource-dir "/usr/local/lib/clang/23" -MT CMakeFiles/__cmake_cxx26.dir/usr/local/share/libc++/v1/std.cppm.o.ddi -MD -MF CMakeFiles/__cmake_cxx26.dir/usr/local/share/libc++/v1/std.cppm.o.ddi.d > CMakeFiles/__cmake_cxx26.dir/usr/local/share/libc++/v1/std.cppm.o.ddi.tmp && mv CMakeFiles/__cmake_cxx26.dir/usr/local/share/libc++/v1/std.cppm.o.ddi.tmp CMakeFiles/__cmake_cxx26.dir/usr/local/share/libc++/v1/std.cppm.o.ddi
+
+
+--rtlib=compiler-rt
