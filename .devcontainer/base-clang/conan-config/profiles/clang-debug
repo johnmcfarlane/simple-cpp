@@ -7,7 +7,7 @@ compiler.libcxx=libc++
 
 [conf]
 !&:tools.build:cxxflags=["-D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_DEBUG", "-fsanitize-trap", "-fsanitize=address,undefined"]
-&:tools.build:cxxflags=["-D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_DEBUG", "-fsanitize-trap", "-fsanitize=address,undefined", "-g", "-Wall", "-Werror", "-Wextra", "-Wno-unused-command-line-argument"]
+&:tools.build:cxxflags=["-D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_DEBUG", "-fsanitize-trap", "-fsanitize=address,undefined", "-g", "-Wall", "-Werror", "-Wextra"]
 
 [tool_requires]
 fmt/*:cmake/[~4.3]
