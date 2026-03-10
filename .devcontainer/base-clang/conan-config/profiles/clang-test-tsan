@@ -7,7 +7,7 @@ compiler.libcxx=libc++
 
 [conf]
 !&:tools.build:cxxflags=["-fno-sanitize-recover=all", "-fsanitize=thread"]
-&:tools.build:cxxflags=["-fno-sanitize-recover=all", "-fsanitize=thread", "-g", "-Wall", "-Werror", "-Wextra"]
+&:tools.build:cxxflags=["-fno-sanitize-recover=all", "-fsanitize=thread", "-g", "-Wall", "-Werror", "-Wextra", "-Wno-unused-command-line-argument"]
 
 [tool_requires]
-fmt/*:cmake/[~4.2]
+fmt/*:cmake/[~4.3]

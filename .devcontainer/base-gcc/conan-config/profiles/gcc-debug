@@ -9,4 +9,4 @@ compiler.cppstd=26
 &:tools.build:cxxflags=["-D_GLIBCXX_ASSERTIONS=1", "-fsanitize-trap", "-fsanitize=address,undefined", "-g", "-Wall", "-Werror", "-Wextra"]
 
 [tool_requires]
-fmt/*:cmake/[~4.2]
+fmt/*:cmake/[~4.3]
