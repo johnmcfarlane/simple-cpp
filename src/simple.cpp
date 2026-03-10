@@ -1,11 +1,16 @@
-#include <simple/simple.h>
+module;
 
 #include <fmt/printf.h>
 
-using fmt::print;
+export module simple;
 
-auto simple::add(int lhs, int rhs) -> int
+namespace simple
 {
-    print("{} + {} = {}\n", lhs, rhs, lhs + rhs);
-    return lhs + rhs;
+    using fmt::print;
+
+    export constexpr auto add(auto lhs, auto rhs)
+    {
+        print("{} + {} = {}", lhs, rhs, lhs + rhs);
+        return lhs + rhs;
+    }
 }

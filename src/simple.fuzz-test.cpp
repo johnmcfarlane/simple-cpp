@@ -1,4 +1,4 @@
-#include <simple/simple.h>
+import simple;
 
 #include <cstdint>
 #include <cstdlib>

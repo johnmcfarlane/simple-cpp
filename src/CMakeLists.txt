@@ -1,8 +1,12 @@
 find_package(Catch2 REQUIRED)
 find_package(fmt REQUIRED)
 
-add_library(simple simple.cpp)
-target_include_directories(simple PUBLIC include)
+add_library(simple)
+target_sources(simple
+  PUBLIC
+    FILE_SET CXX_MODULES FILES
+      simple.cpp
+)
 target_link_libraries(simple PRIVATE fmt::fmt)
 
 add_executable(simple.unit-test simple.unit-test.cpp)
