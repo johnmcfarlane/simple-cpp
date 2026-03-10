@@ -7,10 +7,10 @@ compiler.libcxx=libstdc++
 
 [conf]
 !&:tools.build:cxxflags=["-D_GLIBCXX_ASSERTIONS=1", "-fno-sanitize-recover=all", "-fsanitize=address,fuzzer-no-link,undefined"]
-&:tools.build:cxxflags=["-D_GLIBCXX_ASSERTIONS=1", "-fno-sanitize-recover=all", "-fsanitize=address,fuzzer-no-link,undefined", "-g", "-Wall", "-Werror", "-Wextra"]
+&:tools.build:cxxflags=["-D_GLIBCXX_ASSERTIONS=1", "-fno-sanitize-recover=all", "-fsanitize=address,fuzzer-no-link,undefined", "-g", "-Wall", "-Werror", "-Wextra", "-Wno-unused-command-line-argument"]
 
 [buildenv]
 FUZZER_CXX_FLAGS=-fsanitize=address,fuzzer,undefined
 
 [tool_requires]
-fmt/*:cmake/[~4.2]
+fmt/*:cmake/[~4.3]
