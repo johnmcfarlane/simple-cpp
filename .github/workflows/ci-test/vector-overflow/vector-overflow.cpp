@@ -1,4 +1,4 @@
-#include <vector>
+import std;
 
 auto main() -> int
 {

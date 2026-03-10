@@ -3,6 +3,7 @@
 #include <limits>
 
 import simple;
+import std;
 
 TEST_CASE("non-negative", "simple::add")
 {
