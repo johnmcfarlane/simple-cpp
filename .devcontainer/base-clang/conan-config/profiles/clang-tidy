@@ -10,4 +10,4 @@ compiler.libcxx=libc++
 &:tools.build:cxxflags=["-D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_FAST", "-fsanitize-trap", "-fsanitize=address,undefined", "-g", "-Wall", "-Werror", "-Wextra"]
 
 [tool_requires]
-fmt/*:cmake/[~4.2]
+fmt/*:cmake/[~4.3]

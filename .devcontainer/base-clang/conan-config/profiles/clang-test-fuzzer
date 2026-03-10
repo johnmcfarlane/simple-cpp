@@ -13,4 +13,4 @@ compiler.libcxx=libstdc++
 FUZZER_CXX_FLAGS=-fsanitize=address,fuzzer,undefined
 
 [tool_requires]
-fmt/*:cmake/[~4.2]
+fmt/*:cmake/[~4.3]

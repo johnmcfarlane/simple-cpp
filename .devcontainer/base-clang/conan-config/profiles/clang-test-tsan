@@ -10,4 +10,4 @@ compiler.libcxx=libc++
 &:tools.build:cxxflags=["-fno-sanitize-recover=all", "-fsanitize=thread", "-g", "-Wall", "-Werror", "-Wextra"]
 
 [tool_requires]
-fmt/*:cmake/[~4.2]
+fmt/*:cmake/[~4.3]
