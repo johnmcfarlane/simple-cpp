@@ -18,6 +18,7 @@
             "--toolchain", "/tmp/build/conan_toolchain.cmake",
             "-B", "/tmp/build",
             "-DCMAKE_BUILD_TYPE=Release",
+            "-DCMAKE_CXX_STDLIB_MODULES_JSON=/usr/lib/llvm-22/lib/libc++.modules.json",
             "-DCMAKE_PREFIX_PATH=/tmp/build",
             "-G", "Ninja",
             "-S", "${localEnv:PROJECT_SUBDIRECTORY:.}"

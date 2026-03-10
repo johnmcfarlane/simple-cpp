@@ -5,7 +5,6 @@ Checks: >
   -cppcoreguidelines-pro-bounds-avoid-unchecked-container-access,
   -fuchsia-trailing-return,
   -google-readability-namespace-comments,
-  -llvm-header-guard,
   -llvm-namespace-comment,
   -llvm-prefer-static-over-anonymous-namespace,
   -llvmlibc-*,
@@ -24,6 +23,7 @@ ImplementationFileExtensions:
   - cpp
   - cxx
 HeaderFilterRegex: '.*'
+ExcludeHeaderFilterRegex: '/usr/' # TODO: Remove this once modules support is more mature.
 CheckOptions:
   modernize-use-trailing-return-type.TransformLambdas: none
 SystemHeaders: false
