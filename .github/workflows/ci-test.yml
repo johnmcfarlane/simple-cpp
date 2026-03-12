@@ -9,7 +9,7 @@ on:
     paths:
       - '.clang-tidy'
       - '.devcontainer/**'
-      - '.github/ci-test**'
+      - '.github/**'
       - 'conanfile.txt'
   workflow_dispatch:
 
