@@ -7,27 +7,38 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(CTest)
 
-if ($ENV{TRIGGER_CCG_VIOLATION})
-  add_executable(trigger.cppcoreguidelines-avoid-goto trigger.cppcoreguidelines-avoid-goto.cpp)
-  add_test(trigger.cppcoreguidelines-avoid-goto trigger.cppcoreguidelines-avoid-goto)
-endif ()
+function(add_static_test test_name will_fail)
+    add_test(NAME ${test_name}
+        COMMAND ${CMAKE_CTEST_COMMAND}
+                --build-and-test
+                    ${CMAKE_CURRENT_LIST_DIR}/${test_name}
+                    ${CMAKE_CURRENT_BINARY_DIR}/${test_name}
+                --build-generator ${CMAKE_GENERATOR}
+                --build-options
+                    "--toolchain=${CMAKE_CURRENT_BINARY_DIR}/../../../conan_toolchain.cmake"
+                    "-DCMAKE_CXX_CLANG_TIDY=${CMAKE_CXX_CLANG_TIDY}"
+                --test-command ${CMAKE_CTEST_COMMAND}
+    )
+    set_property(TEST ${test_name} PROPERTY WILL_FAIL ${will_fail})
+endfunction()
 
-if ($ENV{TRIGGER_MT_BUG})
-  add_executable(trigger.data-race trigger.data-race.cpp)
-  add_test(trigger.data-race trigger.data-race)
-endif ()
+function(add_dynamic_test test_name will_fail)
+    add_executable(${test_name} ${test_name}.cpp)
+    add_test(NAME ${test_name} COMMAND ${CMAKE_COMMAND} -E env $<TARGET_FILE:${test_name}>)
+    set_property(TEST ${test_name} PROPERTY WILL_FAIL ${will_fail})
+endfunction()
 
-if ($ENV{TRIGGER_INTEGER_BUG})
-  add_executable(trigger.integer-overflow trigger.integer-overflow.cpp)
-  add_test(trigger.integer-overflow trigger.integer-overflow)
-endif ()
+# Clang-Tidy checks for use of `goto`
+add_static_test(goto $ENV{TRIGGER_CLANG_TIDY})
 
-if ($ENV{TRIGGER_STDLIB_BUG})
-  add_executable(trigger.vector-overflow trigger.vector-overflow.cpp)
-  add_test(trigger.vector-overflow trigger.vector-overflow)
-endif ()
+# Standard library catches UB
+add_dynamic_test(vector-overflow $ENV{TRIGGER_STDLIB})
 
-if ($ENV{TRIGGER_COMPILER_WARNING})
-  add_executable(trigger.unused-label trigger.unused-label.cpp)
-  add_test(trigger.unused-label trigger.unused-label)
-endif ()
+# TSan catches data races
+add_dynamic_test(data-race $ENV{TRIGGER_TSAN})
+
+# UBSan catches integer overflow
+add_dynamic_test(integer-overflow $ENV{TRIGGER_UBSAN})
+
+# Compiler has elevated/hardened warning levels
+add_static_test(unused-label $ENV{TRIGGER_WARNING})
