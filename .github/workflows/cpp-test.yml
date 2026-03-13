@@ -18,7 +18,7 @@ jobs:
       matrix:
         include:
           - name: base-clang
-            version: 2026-03-11
+            version: 2026-03-13
           - name: base-gcc
             version: 8db7ba7ffbf
 
