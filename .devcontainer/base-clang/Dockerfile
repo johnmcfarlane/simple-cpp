@@ -4,7 +4,7 @@ COPY .devcontainer/base-clang/http_apt_llvm_org_trixie.sources /etc/apt/sources.
 RUN wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc
 
 RUN apt-get update \
-  && apt-get purge --yes binutils gcc g++ --autoremove \
+  && apt-get purge --yes binutils gcc g++ make --autoremove \
   && apt-get install --no-install-recommends --quiet --yes \
       clang-22 \
       clang-format-22 \
