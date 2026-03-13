@@ -11,7 +11,7 @@ RUN apt-get update --quiet \
   && /gcc/configure --disable-multilib --enable-languages=c,c++,lto \
   && make --jobs $(nproc) \
   && make install \
-  && apt-get purge --autoremove --yes flex g++ gcc libgmp-dev libmpc-dev libmpfr-dev \
+  && apt-get purge --autoremove --yes flex g++ gcc libgmp-dev libmpc-dev libmpfr-dev make \
   && apt-get install --no-install-recommends --quiet --yes libc6-dev \
   && rm -rf /gcc /build /var/lib/apt/lists/*
 
