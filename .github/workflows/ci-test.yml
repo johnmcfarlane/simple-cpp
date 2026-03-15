@@ -23,6 +23,7 @@ jobs:
       packages: write
 
     strategy:
+      fail-fast: false
       matrix:
         include:
           - devcontainer: clang-debug
@@ -115,4 +116,4 @@ jobs:
             TRIGGER_WARNING=${{ matrix.trigger_warning }}
           runCmd: |
             cmake --build $BUILD_DIR --verbose
-            ctest --output-on-failure --test-dir $BUILD_DIR --verbose
+            ctest --output-on-failure --parallel --test-dir $BUILD_DIR --verbose
