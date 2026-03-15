@@ -19,7 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       image_tag: 2
-      PROJECT_SUBDIRECTORY: ".github/workflows/ci-test/"
     permissions:
       packages: write
 
@@ -102,6 +101,8 @@ jobs:
 
       - name: Build and run control tests
         uses: devcontainers/ci@v0.3
+        env:
+          PROJECT_SUBDIRECTORY: ".github/workflows/ci-test"
         with:
           configFile: .devcontainer/${{ matrix.devcontainer }}/devcontainer.json
           imageName: ghcr.io/johnmcfarlane/simple-cpp/ci-test-${{ matrix.devcontainer }}
