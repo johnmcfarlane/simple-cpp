@@ -1,6 +1,6 @@
 static auto f()
 {
-unused_label:
+my_unused_label:
 }
 
 auto main() -> int
