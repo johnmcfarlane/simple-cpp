@@ -7,38 +7,51 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(CTest)
 
-function(add_static_test test_name will_fail)
-    add_test(NAME ${test_name}
+function(setup_control_test_properties test_name will_fail)
+    # Test for the expected exit status.
+    set_property(TEST ${test_name} PROPERTY WILL_FAIL ${will_fail})
+endfunction()
+
+function(add_control_test fault_name)
+    add_test(NAME ${fault_name}
         COMMAND ${CMAKE_CTEST_COMMAND}
                 --build-and-test
-                    ${CMAKE_CURRENT_LIST_DIR}/${test_name}
-                    ${CMAKE_CURRENT_BINARY_DIR}/${test_name}
+                    ${CMAKE_CURRENT_LIST_DIR}/${fault_name}
+                    ${CMAKE_CURRENT_BINARY_DIR}/${fault_name}
                 --build-generator ${CMAKE_GENERATOR}
+                --build-noclean
                 --build-options
-                    "--toolchain=${CMAKE_CURRENT_BINARY_DIR}/../../../conan_toolchain.cmake"
+                    --toolchain=${CMAKE_CURRENT_BINARY_DIR}/../../../conan_toolchain.cmake
+                    "-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}"
                     "-DCMAKE_CXX_CLANG_TIDY=${CMAKE_CXX_CLANG_TIDY}"
-                --test-command ${CMAKE_CTEST_COMMAND}
-    )
-    set_property(TEST ${test_name} PROPERTY WILL_FAIL ${will_fail})
+                --test-command ${fault_name})
 endfunction()
 
-function(add_dynamic_test test_name will_fail)
-    add_executable(${test_name} ${test_name}.cpp)
-    add_test(NAME ${test_name} COMMAND ${CMAKE_COMMAND} -E env $<TARGET_FILE:${test_name}>)
-    set_property(TEST ${test_name} PROPERTY WILL_FAIL ${will_fail})
+# Test a static analyser check.
+function(add_static_control_tests fault_name will_fail)
+    add_control_test(${fault_name})
+
+    setup_control_test_properties(${fault_name} ${will_fail})
 endfunction()
 
-# Clang-Tidy checks for use of `goto`
-add_static_test(goto $ENV{TRIGGER_CLANG_TIDY})
+# Test a dynamic analyser check.
+function(add_dynamic_control_tests fault_name will_fail)
+    add_control_test(${fault_name} ${fault_name})
 
-# Standard library catches UB
-add_dynamic_test(vector-overflow $ENV{TRIGGER_STDLIB})
+    setup_control_test_properties(${fault_name} ${will_fail})
+endfunction()
 
-# TSan catches data races
-add_dynamic_test(data-race $ENV{TRIGGER_TSAN})
+# TSan catches a data race.
+add_dynamic_control_tests(data-race $ENV{TRIGGER_TSAN} "data race")
 
-# UBSan catches integer overflow
-add_dynamic_test(integer-overflow $ENV{TRIGGER_UBSAN})
+# The Sandard Library catches a buffer overflow.
+add_dynamic_control_tests(vector-overflow $ENV{TRIGGER_STDLIB} "Illegal instruction|index out of bounds|Assertion .*size.* failed")
 
-# Compiler has elevated/hardened warning levels
-add_static_test(unused-label $ENV{TRIGGER_WARNING})
+# UBSan catches an integer overflow.
+add_dynamic_control_tests(integer-overflow $ENV{TRIGGER_UBSAN} "Illegal instruction|signed integer overflow")
+
+# Clang-Tidy catches a use of `goto`.
+add_static_control_tests(goto $ENV{TRIGGER_CLANG_TIDY} "avoid using 'goto' for flow control")
+
+# The compiler catches an unused label.
+add_static_control_tests(unused-label $ENV{TRIGGER_WARNING} "my_unused_label")
