@@ -1,4 +1,4 @@
-FROM gcc:trixie
+FROM docker.io/library/gcc:trixie@sha256:9cc747b141fb69baaff237936f742f579fe6439e5b3b533b1c40d82374d220a0
 
 ARG image_version=trunk
 
