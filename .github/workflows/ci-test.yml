@@ -20,6 +20,8 @@ jobs:
     env:
       image_tag: 2
       PROJECT_SUBDIRECTORY: ".github/workflows/ci-test/"
+    permissions:
+      packages: write
 
     strategy:
       matrix:
