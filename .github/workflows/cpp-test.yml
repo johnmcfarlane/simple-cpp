@@ -20,7 +20,7 @@ jobs:
           - name: base-clang
             version: 2026-03-13
           - name: base-gcc
-            version: 1d09c30fd77
+            version: 5a166514951
 
     steps:
       - name: Check out code
