@@ -11,10 +11,10 @@
         "context": "${localWorkspaceFolder}",
         "options": ["--progress=plain"]
     },
-    "remoteUser": "root",
     "runArgs": [
         "--privileged"
     ],
+    "containerUser": "debra",
     "postCreateCommand": {
         "configure build system": [
             "cmake",

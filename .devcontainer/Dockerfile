@@ -6,13 +6,24 @@ ARG base_image
 ARG profile=error-missing-profile-arg
 ENV BUILD_DIR=/tmp/build
 
+# Create the user, from
+# https://code.visualstudio.com/remote/advancedcontainers/add-nonroot-user#_creating-a-nonroot-user
+ARG USERNAME=user-name-goes-here
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+
+RUN groupadd --gid $USER_GID $USERNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME
+
+USER $USERNAME
+ENV HOME=/home/$USERNAME
+
 # set system wide Clang-Tidy configuration
 COPY .clang-tidy /
 
 # configure Conan
-ENV CONAN_HOME=/tmp/conan
-COPY .devcontainer/${base_image}/conan-config /tmp/conan-config
-RUN conan config install /tmp/conan-config
+COPY .devcontainer/${base_image}/conan-config $HOME/conan-config
+RUN conan config install $HOME/conan-config
 RUN conan profile detect --force
 
 # install dependencies
