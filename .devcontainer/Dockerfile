@@ -9,6 +9,11 @@ ENV BUILD_DIR=/tmp/build
 # set system wide Clang-Tidy configuration
 COPY .clang-tidy /
 
+RUN apt-get purge --quiet --yes \
+      clang \
+      cmake \
+      lld
+
 # configure Conan
 ENV CONAN_HOME=/tmp/conan
 COPY .devcontainer/${base_image}/conan-config /tmp/conan-config
