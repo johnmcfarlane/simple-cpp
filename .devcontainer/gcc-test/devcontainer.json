@@ -11,6 +11,7 @@
         "context": "${localWorkspaceFolder}",
         "options": ["--progress=plain"]
     },
+    "containerUser": "debra",
     "postCreateCommand": {
         "configure build system": [
             "cmake",
