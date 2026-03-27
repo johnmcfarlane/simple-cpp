@@ -1,6 +1,6 @@
-#include <catch2/catch_test_macros.hpp>
+#include <simple/simple.h>
 
-#include "simple.h"
+#include <catch2/catch_test_macros.hpp>
 
 TEST_CASE("non-negative", "simple::add")
 {
