@@ -1,3 +1,6 @@
+[requires]
+fmt/[~12]
+
 [test_requires]
 catch2/[~3.13]
 

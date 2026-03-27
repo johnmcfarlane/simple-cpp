@@ -7,3 +7,6 @@ compiler.cppstd=26
 [conf]
 !&:tools.build:cxxflags=["-D_GLIBCXX_ASSERTIONS=1", "-fsanitize-trap", "-fsanitize=address,undefined"]
 &:tools.build:cxxflags=["-D_GLIBCXX_ASSERTIONS=1", "-fsanitize-trap", "-fsanitize=address,undefined", "-g", "-Wall", "-Werror", "-Wextra"]
+
+[tool_requires]
+fmt/*: cmake/4.2.3

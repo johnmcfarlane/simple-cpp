@@ -1,8 +1,8 @@
 #include <simple/simple.h>
 
-#include <print>
+#include <fmt/printf.h>
 
-using std::print;
+using fmt::print;
 
 auto simple::add(int lhs, int rhs) -> int
 {
