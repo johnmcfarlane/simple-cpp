@@ -5,9 +5,11 @@
 
 namespace simple
 {
+    using std::print;
+
     constexpr auto add(auto lhs, auto rhs)
     {
-        std::println("{} + {} = {}", lhs, rhs, lhs + rhs);
+        print("{} + {} = {}\n", lhs, rhs, lhs + rhs);
         return lhs + rhs;
     }
 }
