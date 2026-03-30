@@ -1,6 +1,6 @@
 #include <vector>
 
-auto main() noexcept(false) -> int
+auto main() -> int
 {
     std::vector<int> numbers;
     numbers.reserve(1);
