@@ -30,7 +30,7 @@ function(add_control_test test_name fault_name)
                 --build-generator ${CMAKE_GENERATOR}
                 --build-noclean
                 --build-options
-                    --toolchain=${CMAKE_CURRENT_BINARY_DIR}/../../../conan_toolchain.cmake
+                    --toolchain=${CMAKE_CURRENT_BINARY_DIR}/conan_toolchain.cmake
                     "-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}"
                     "-DCMAKE_CXX_CLANG_TIDY=${CMAKE_CXX_CLANG_TIDY}"
                 --test-command ${fault_name})

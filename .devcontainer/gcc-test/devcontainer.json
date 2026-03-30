@@ -14,10 +14,10 @@
     "postCreateCommand": {
         "configure build system": [
             "cmake",
-            "--toolchain", "/tmp/build/conan_toolchain.cmake",
-            "-B", "/tmp/build",
+            "--toolchain", "/home/tux/build/conan_toolchain.cmake",
+            "-B", "/home/tux/build",
             "-DCMAKE_BUILD_TYPE=Release",
-            "-DCMAKE_PREFIX_PATH=/tmp/build",
+            "-DCMAKE_PREFIX_PATH=/home/tux/build",
             "-G", "Ninja",
             "-S", "${localEnv:PROJECT_SUBDIRECTORY:.}"
         ]

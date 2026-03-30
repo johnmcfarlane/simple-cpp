@@ -4,7 +4,12 @@ FROM ghcr.io/johnmcfarlane/simple-cpp/${base_image}:${base_image_version}
 
 ARG base_image
 ARG profile=error-missing-profile-arg
-ENV BUILD_DIR=/tmp/build
+
+RUN groupadd --gid 1000 tux \
+    && useradd --create-home --gid 1000 --shell /bin/bash --uid 1000 tux
+USER tux
+
+ENV BUILD_DIR=/home/tux/build
 
 # set system wide Clang-Tidy configuration
 COPY .clang-tidy /
