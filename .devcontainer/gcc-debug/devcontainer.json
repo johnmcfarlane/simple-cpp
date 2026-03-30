@@ -13,15 +13,7 @@
     },
     "remoteUser": "tux",
     "postCreateCommand": {
-        "configure build system": [
-            "cmake",
-            "--toolchain", "/home/tux/build/conan_toolchain.cmake",
-            "-B", "/home/tux/build",
-            "-DCMAKE_BUILD_TYPE=Debug",
-            "-DCMAKE_PREFIX_PATH=/home/tux/build",
-            "-G", "Ninja",
-            "-S", "${localEnv:PROJECT_SUBDIRECTORY:.}"
-        ]
+        "configure build system": "cmake --toolchain $BUILD_DIR/conan_toolchain.cmake -B $BUILD_DIR -DCMAKE_BUILD_TYPE=Debug -DCMAKE_PREFIX_PATH=$BUILD_DIR -G Ninja -S ${localEnv:PROJECT_SUBDIRECTORY:.}"
     },
     "customizations": {
         "vscode": {
