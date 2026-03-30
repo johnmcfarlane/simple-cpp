@@ -17,11 +17,3 @@ RUN apt-get update --quiet \
 ENV LD_LIBRARY_PATH=/usr/local/lib64
 
 RUN pip install "conan==2.24.0" --break-system-packages --no-cache-dir
-
-COPY .clang-tidy /
-
-# configure Conan
-ENV CONAN_HOME=/tmp/conan
-COPY .devcontainer/base-gcc/conan-config /tmp/conan-config
-RUN conan config install /tmp/conan-config
-RUN conan profile detect --force
