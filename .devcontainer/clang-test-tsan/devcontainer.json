@@ -11,7 +11,7 @@
         "context": "${localWorkspaceFolder}",
         "options": ["--progress=plain"]
     },
-    "remoteUser": "root",
+    "remoteUser": "vscode",
     "runArgs": [
         "--privileged"
     ],

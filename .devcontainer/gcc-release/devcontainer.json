@@ -11,6 +11,7 @@
         "context": "${localWorkspaceFolder}",
         "options": ["--progress=plain"]
     },
+    "remoteUser": "vscode",
     "postCreateCommand": {
         "configure build system": [
             "cmake",

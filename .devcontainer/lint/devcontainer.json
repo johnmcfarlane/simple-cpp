@@ -6,6 +6,7 @@
         "context": "${localWorkspaceFolder}",
         "options": ["--progress=plain"]
     },
+    "remoteUser": "vscode",
     "customizations": {
         "vscode": {
             "extensions": [

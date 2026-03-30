@@ -5,6 +5,7 @@ FROM ghcr.io/johnmcfarlane/simple-cpp/${base_image}:${base_image_version}
 ARG base_image
 ARG profile=error-missing-profile-arg
 ENV BUILD_DIR=/tmp/build
+USER vscode
 
 # set system wide Clang-Tidy configuration
 COPY .clang-tidy /
