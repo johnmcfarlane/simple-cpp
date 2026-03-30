@@ -2,10 +2,16 @@
 {
     "name": "Lint",
     "build": {
-        "dockerfile": "${localWorkspaceFolder}/.devcontainer/base-clang/Dockerfile",
+        "dockerfile": "${localWorkspaceFolder}/.devcontainer/Dockerfile",
+        "args": {
+            "base_image": "base-clang",
+            "base_image_version": "2026-03-31",
+            "profile": "clang-release"
+        },
         "context": "${localWorkspaceFolder}",
         "options": ["--progress=plain"]
     },
+    "remoteUser": "tux",
     "customizations": {
         "vscode": {
             "extensions": [
