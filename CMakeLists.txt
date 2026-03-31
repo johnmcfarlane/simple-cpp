@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 4.2.0)
+cmake_minimum_required(VERSION 4.2)
 project(simple-cpp LANGUAGES CXX)
 
 set(CMAKE_CXX_EXTENSIONS OFF)

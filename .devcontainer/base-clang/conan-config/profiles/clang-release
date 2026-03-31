@@ -6,4 +6,4 @@ compiler.cppstd=26
 compiler.libcxx=libc++
 
 [tool_requires]
-fmt/*: cmake/4.2.3
+fmt/*:cmake/[~4.2]
