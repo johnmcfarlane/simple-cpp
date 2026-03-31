@@ -5,4 +5,4 @@ build_type=Release
 compiler.cppstd=26
 
 [tool_requires]
-fmt/*: cmake/4.2.3
+fmt/*:cmake/[~4.2]

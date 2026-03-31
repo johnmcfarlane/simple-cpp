@@ -5,4 +5,4 @@ fmt/[~12]
 catch2/[~3.13]
 
 [tool_requires]
-cmake/4.2.3
+cmake/[~4.2]
