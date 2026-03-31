@@ -15,20 +15,21 @@ ENV BUILD_DIR=/home/tux/build
 COPY .clang-tidy /
 
 # configure Conan
-ENV CONAN_HOME=/tmp/conan
-COPY .devcontainer/${base_image}/conan-config /tmp/conan-config
-RUN conan config install /tmp/conan-config
+COPY --chown=tux .devcontainer/${base_image}/conan-config /home/tux/conan-config
+RUN conan config install /home/tux/conan-config
+RUN rm -rf /home/tux/conan-config
 RUN conan profile detect --force
 
 # install dependencies
-COPY conanfile.txt .
+COPY --chown=tux conanfile.txt /home/tux
 RUN conan install \
     --build="*" \
     --generator=CMakeDeps \
     --generator=CMakeToolchain \
     --output-folder="$BUILD_DIR" \
     --profile=${profile} \
-    .
+    /home/tux
+RUN rm /home/tux/conanfile.txt
 
 # append dev environment script to user environment script
 RUN cat $BUILD_DIR/conanbuild.sh >> ~/.bashrc
