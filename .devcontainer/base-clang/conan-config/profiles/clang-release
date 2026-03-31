@@ -7,6 +7,15 @@ compiler.libcxx=libc++
 
 [conf]
 &:tools.build:cxxflags=["-Wno-unused-command-line-argument"]
+tools.cmake.cmaketoolchain:extra_variables={'FMT_MODULE': 'ON', 'FMT_USE_CMAKE_MODULES': 'ON'}
+
+[options]
+fmt/*:header_only=False
+fmt/*:shared=False
+fmt/*:fPIC=True
+fmt/*:with_fmt_alias=False
+fmt/*:with_os_api=True
+fmt/*:with_unicode=True
 
 [tool_requires]
 fmt/*:cmake/[~4.3]

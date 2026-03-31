@@ -8,6 +8,7 @@ compiler.libcxx=libstdc++
 [conf]
 !&:tools.build:cxxflags=["-D_GLIBCXX_ASSERTIONS=1", "-fno-sanitize-recover=all", "-fsanitize=address,fuzzer-no-link,undefined"]
 &:tools.build:cxxflags=["-D_GLIBCXX_ASSERTIONS=1", "-fno-sanitize-recover=all", "-fsanitize=address,fuzzer-no-link,undefined", "-g", "-Wall", "-Werror", "-Wextra", "-Wno-unused-command-line-argument"]
+tools.cmake.cmaketoolchain:extra_variables={'FMT_MODULE': 'ON', 'FMT_USE_CMAKE_MODULES': 'ON'}
 
 [buildenv]
 FUZZER_CXX_FLAGS=-fsanitize=address,fuzzer,undefined

@@ -8,6 +8,7 @@ compiler.libcxx=libc++
 [conf]
 !&:tools.build:cxxflags=["-fno-sanitize-recover=all", "-fsanitize=thread"]
 &:tools.build:cxxflags=["-fno-sanitize-recover=all", "-fsanitize=thread", "-g", "-Wall", "-Werror", "-Wextra", "-Wno-unused-command-line-argument"]
+tools.cmake.cmaketoolchain:extra_variables={'FMT_MODULE': 'ON', 'FMT_USE_CMAKE_MODULES': 'ON'}
 
 [tool_requires]
 fmt/*:cmake/[~4.3]
