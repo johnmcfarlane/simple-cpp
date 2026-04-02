@@ -81,7 +81,7 @@ jobs:
           imageName: ghcr.io/johnmcfarlane/simple-cpp/${{ matrix.name }}
           imageTag: 2
           runCmd: |
-            cmake --build $BUILD_DIR
+            cmake --build $BUILD_DIR --verbose
             ctest --output-on-failure --test-dir $BUILD_DIR
 
   lint:
