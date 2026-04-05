@@ -8,6 +8,7 @@ compiler.libcxx=libc++
 [conf]
 !&:tools.build:cxxflags=["-D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_FAST", "-fsanitize-trap", "-fsanitize=address,undefined"]
 &:tools.build:cxxflags=["-D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_FAST", "-fsanitize-trap", "-fsanitize=address,undefined", "-g", "-Wall", "-Werror", "-Wextra", "-Wno-unused-command-line-argument"]
+tools.cmake.cmaketoolchain:extra_variables={'FMT_MODULE': 'ON', 'FMT_USE_CMAKE_MODULES': 'ON'}
 
 [tool_requires]
 fmt/*:cmake/[~4.3]
