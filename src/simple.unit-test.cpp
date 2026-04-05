@@ -1,5 +1,7 @@
 #include <catch2/catch_test_macros.hpp>
 
+#include <limits>
+
 import simple;
 
 TEST_CASE("non-negative", "simple::add")
