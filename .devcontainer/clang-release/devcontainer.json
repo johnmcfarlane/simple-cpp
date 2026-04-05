@@ -13,7 +13,7 @@
     },
     "remoteUser": "tux",
     "postCreateCommand": {
-        "configure build system": "cmake --toolchain $BUILD_DIR/conan_toolchain.cmake -B $BUILD_DIR -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=$BUILD_DIR -G Ninja -S ${localEnv:PROJECT_SUBDIRECTORY:.}"
+        "configure build system": "cmake --toolchain $BUILD_DIR/conan_toolchain.cmake -B $BUILD_DIR -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_STDLIB_MODULES_JSON=/usr/lib/llvm-23/lib/libc++.modules.json -DCMAKE_PREFIX_PATH=$BUILD_DIR -G Ninja -S ${localEnv:PROJECT_SUBDIRECTORY:.}"
     },
     "customizations": {
         "vscode": {
