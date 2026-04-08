@@ -6,8 +6,8 @@ compiler.cppstd=26
 compiler.libcxx=libc++
 
 [conf]
-!&:tools.build:cxxflags=["-fdiagnostics-color=always", "-fno-sanitize-recover=all", "-fsanitize=thread"]
-&:tools.build:cxxflags=["-fdiagnostics-color=always", "-fno-sanitize-recover=all", "-fsanitize=thread", "-g", "-Wall", "-Werror", "-Wextra", "-Wno-unused-command-line-argument"]
+!&:tools.build:cxxflags=["-fcontract-evaluation-semantic=ignore", "-fcontracts", "-fdiagnostics-color=always", "-fno-sanitize-recover=all", "-fsanitize=thread"]
+&:tools.build:cxxflags=["-fcontract-evaluation-semantic=ignore", "-fcontracts", "-fdiagnostics-color=always", "-fno-sanitize-recover=all", "-fsanitize=thread", "-g", "-Wall", "-Werror", "-Wextra", "-Wno-unused-command-line-argument"]
 
 [tool_requires]
 fmt/*:cmake/[~4.3]

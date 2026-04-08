@@ -4,5 +4,9 @@ include(default)
 build_type=Release
 compiler.cppstd=26
 
+[conf]
+!&:tools.build:cxxflags=["-fcontract-evaluation-semantic=ignore", "-fcontracts"]
+&:tools.build:cxxflags=["-fcontract-evaluation-semantic=ignore", "-fcontracts"]
+
 [tool_requires]
 fmt/*:cmake/[~4.3]
