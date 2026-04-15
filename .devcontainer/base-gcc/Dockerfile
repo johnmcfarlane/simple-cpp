@@ -3,7 +3,23 @@ FROM debian:13.4
 ARG image_version=trunk
 
 RUN apt-get update --quiet \
-  && apt-get install --no-install-recommends --quiet --yes binutils build-essential flex gcc-multilib gdb git gnulib libgmp-dev libmpc3 libmpc-dev libmpfr-dev ninja-build python3-pip \
+  && apt-get purge --autoremove --yes flex g++ gcc \
+  && apt-get install --no-install-recommends --quiet --yes \
+      binutils \
+      build-essential \
+      clang++-19 \
+      flex \
+      gcc-multilib \
+      gdb \
+      git \
+      gnulib \
+      libgmp-dev \
+      libmpc-dev \
+      libmpc3 \
+      libmpfr-dev \
+      ninja-build \
+      python3-pip \
+      sudo \
   && git clone --branch trunk --single-branch git://gcc.gnu.org/git/gcc.git \
   && cd gcc && git checkout ${image_version} && cd .. \
   && mkdir /build && cd /build \
