@@ -22,6 +22,13 @@ RUN conan config install /home/tux/conan-config
 RUN rm -rf /home/tux/conan-config
 RUN conan profile detect --force
 
+# configure remote
+RUN git clone --branch=simple-cpp --depth=1 https://github.com/johnmcfarlane/conan-center-index.git ~/conan-center-index \
+    && cd ~/conan-center-index \
+    && git checkout eed65da43
+RUN conan remote disable conancenter
+RUN conan remote add local ~/conan-center-index
+
 # install dependencies
 COPY --chown=tux conanfile.txt /home/tux
 RUN conan install \
