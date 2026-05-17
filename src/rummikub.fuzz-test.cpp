@@ -1,4 +1,4 @@
-import simple;
+import rummikub;
 
 #include <cstdint>
 #include <cstdlib>
@@ -35,6 +35,6 @@ extern "C" int LLVMFuzzerTestOneInput(std::uint8_t const* data, std::size_t size
         return -1;
     }
 
-    simple::add(params.a, params.b);
+    rummikub::add(params.a, params.b);
     return 0;
 }
