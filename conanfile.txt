@@ -2,7 +2,7 @@
 fmt/[~12]
 
 [test_requires]
-catch2/[~3.13]
+catch2/[~3.14]
 
 [tool_requires]
 cmake/[~4.3]
