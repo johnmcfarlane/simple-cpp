@@ -6,11 +6,11 @@ on:
   push:
     branches:
       - '**'
-    paths:
-      - '.clang-tidy'
-      - '.devcontainer/**'
-      - '.github/**'
-      - 'conanfile.txt'
+    paths-ignore:
+      - 'src/**'
+      - 'CMakeLists.txt'
+      - 'LICENCE'
+      - 'README.md'
   workflow_dispatch:
 
 jobs:
