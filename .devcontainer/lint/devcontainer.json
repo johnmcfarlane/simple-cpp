@@ -4,8 +4,7 @@
     "build": {
         "dockerfile": "${localWorkspaceFolder}/.devcontainer/Dockerfile",
         "args": {
-            "base_image": "base-clang",
-            "base_image_version": "2026-04-15",
+            "cxx": "clang++",
             "profile": "clang-release"
         },
         "context": "${localWorkspaceFolder}",

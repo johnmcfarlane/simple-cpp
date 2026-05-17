@@ -8,44 +8,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  images:
-    name: images
-    runs-on: ubuntu-latest
-    permissions:
-      packages: write
-
-    strategy:
-      matrix:
-        include:
-          - name: base-clang
-            version: 2026-04-15
-          - name: base-gcc
-            version: 16.1.0
-
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v6
-
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v4
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build image
-        uses: devcontainers/ci@v0.3
-        with:
-          configFile: .devcontainer/${{ matrix.name }}/devcontainer.json
-          imageName: ghcr.io/johnmcfarlane/simple-cpp/${{ matrix.name }}
-          imageTag: ${{ matrix.version }}
-          runCmd: |
-            which conan
-            conan --version
-
   unit-tests:
     name: test
-    needs: [images]
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -87,7 +51,6 @@ jobs:
 
   lint:
     name: lint
-    needs: [images]
     runs-on: ubuntu-latest
     permissions:
       packages: write
