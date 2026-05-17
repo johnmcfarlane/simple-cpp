@@ -1,13 +1,21 @@
 find_package(Catch2 REQUIRED)
 find_package(fmt REQUIRED)
 
+add_library(fmt-module)
+target_sources(fmt-module
+  PUBLIC
+    FILE_SET CXX_MODULES FILES
+      fmt.cpp
+)
+target_link_libraries(fmt-module PRIVATE fmt::fmt)
+
 add_library(simple)
 target_sources(simple
   PUBLIC
     FILE_SET CXX_MODULES FILES
       simple.cpp
 )
-target_link_libraries(simple PRIVATE fmt::fmt)
+target_link_libraries(simple PRIVATE fmt-module)
 
 add_executable(simple.unit-test simple.unit-test.cpp)
 target_link_libraries(simple.unit-test Catch2::Catch2WithMain simple)
