@@ -4,8 +4,6 @@
     "build": {
         "dockerfile": "${localWorkspaceFolder}/.devcontainer/Dockerfile",
         "args": {
-            "base_image": "base-gcc",
-            "base_image_version": "16.1.0",
             "profile": "gcc-release"
         },
         "context": "${localWorkspaceFolder}",

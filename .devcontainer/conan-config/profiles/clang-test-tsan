@@ -7,6 +7,9 @@ compiler.libcxx=libc++
 compiler.version=22
 os=Linux
 
+[buildenv]
+CXX=clang++
+
 [conf]
 !&:tools.build:cxxflags=["-fdiagnostics-color=always", "-fno-sanitize-recover=all", "-fsanitize=thread"]
 &:tools.build:cxxflags=["-fdiagnostics-color=always", "-fno-sanitize-recover=all", "-fsanitize=thread", "-g", "-Wall", "-Werror", "-Wextra"]

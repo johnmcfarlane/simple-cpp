@@ -7,6 +7,9 @@ compiler.libcxx=libstdc++
 compiler.version=16
 os=Linux
 
+[buildenv]
+CXX=g++
+
 [conf]
 !&:tools.build:cxxflags=["-D_GLIBCXX_ASSERTIONS=1", "-fdiagnostics-color=always", "-fsanitize-trap", "-fsanitize=address,undefined"]
 &:tools.build:cxxflags=["-D_GLIBCXX_ASSERTIONS=1", "-fdiagnostics-color=always", "-fsanitize-trap", "-fsanitize=address,undefined", "-g", "-Wall", "-Werror", "-Wextra"]

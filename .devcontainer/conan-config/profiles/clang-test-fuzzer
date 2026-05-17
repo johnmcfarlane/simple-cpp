@@ -7,12 +7,13 @@ compiler.libcxx=libstdc++
 compiler.version=22
 os=Linux
 
+[buildenv]
+CXX=clang++
+FUZZER_CXX_FLAGS=-fsanitize=address,fuzzer,undefined
+
 [conf]
 !&:tools.build:cxxflags=["-D_GLIBCXX_ASSERTIONS=1", "-fdiagnostics-color=always", "-fno-sanitize-recover=all", "-fsanitize=address,fuzzer-no-link,undefined"]
 &:tools.build:cxxflags=["-D_GLIBCXX_ASSERTIONS=1", "-fdiagnostics-color=always", "-fno-sanitize-recover=all", "-fsanitize=address,fuzzer-no-link,undefined", "-g", "-Wall", "-Werror", "-Wextra"]
-
-[buildenv]
-FUZZER_CXX_FLAGS=-fsanitize=address,fuzzer,undefined
 
 [tool_requires]
 fmt/*:cmake/[~4.3]

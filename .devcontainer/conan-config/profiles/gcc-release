@@ -7,5 +7,8 @@ compiler.libcxx=libstdc++
 compiler.version=16
 os=Linux
 
+[buildenv]
+CXX=g++
+
 [tool_requires]
 fmt/*:cmake/[~4.3]
