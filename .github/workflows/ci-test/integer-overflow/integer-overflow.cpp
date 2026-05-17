@@ -1,4 +1,4 @@
-#include <limits>
+import std;
 
 auto main() -> int
 {

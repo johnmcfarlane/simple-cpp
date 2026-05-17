@@ -1,8 +1,5 @@
 import simple;
-
-#include <cstdint>
-#include <cstdlib>
-#include <cstring>
+import std;
 
 extern "C" int LLVMFuzzerTestOneInput(std::uint8_t const* data, std::size_t size)
 {
