@@ -17,16 +17,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - name: clang-debug
-          - name: clang-release
-          - name: clang-test
-          - name: clang-test-fuzzer
-          - name: clang-test-tsan
-          - name: clang-tidy
-          - name: gcc-debug
-          - name: gcc-release
-          - name: gcc-test
+        profile:
+          - clang-debug
+          - clang-release
+          - clang-test
+          - clang-test-fuzzer
+          - clang-test-tsan
+          - clang-tidy
+          - gcc-debug
+          - gcc-release
+          - gcc-test
 
     steps:
       - name: Check out code
@@ -42,8 +42,8 @@ jobs:
       - name: Build and run tests
         uses: devcontainers/ci@v0.3
         with:
-          configFile: .devcontainer/${{ matrix.name }}/devcontainer.json
-          imageName: ghcr.io/johnmcfarlane/simple-cpp/${{ matrix.name }}
+          configFile: .devcontainer/${{ matrix.profile }}/devcontainer.json
+          imageName: ghcr.io/johnmcfarlane/simple-cpp/${{ matrix.profile }}
           imageTag: 3
           runCmd: |
             cmake --build $BUILD_DIR --verbose
