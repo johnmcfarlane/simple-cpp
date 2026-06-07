@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# run from the root build directory, i.e. BUILD_DIR,
+# after invoking workspace/test with the gcc-gcov profile
+
+set -euox pipefail
+
+build_dir_root=${1}
+profile="${2}"
+build_dir="$build_dir_root"/"$profile"
+project_dir="$(realpath "$(dirname -- "$0")/..")"
+
+output=${3:-"$build_dir"/test-coverage.html}
+
+# Enforce the correct profile. (Limitations of the tasks.json spec. require this.)
+expected_profile=gcc-gcov
+if [[ "$expected_profile" != "$profile" ]]; then
+    printf "error: wrong profile; expected=%s; actual=%s\n" "$expected_profile" "$profile"
+    Profile, gcc-gcov, must be used to generate coverage reports
+    exit 1
+fi
+
+gcovr \
+    --config "$project_dir"/scripts/gcovr.cfg \
+    --exclude '(.+/.+)?\.unit\-test\.cpp$' \
+    --html-details \
+    --output "$output" \
+    --root "$project_dir" \
+    --verbose \
+    "$build_dir"
