@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       packages: write
+    working-directory: /home/tux/build
 
     strategy:
       fail-fast: false
@@ -25,6 +26,7 @@ jobs:
           - clang-test-tsan
           - clang-tidy
           - gcc-debug
+          - gcc-gcov
           - gcc-release
           - gcc-test
 
@@ -48,6 +50,24 @@ jobs:
             scripts/install ${{ matrix.profile }}
             scripts/build ${{ matrix.profile }}
             scripts/test ${{ matrix.profile }}
+
+      - name: Generate coverage report
+        if: ${{ matrix.profile }} == 'gcc-gcov'
+        uses: devcontainers/ci@v0.3
+        with:
+          configFile: .devcontainer/${{ matrix.profile }}/devcontainer.json
+          imageName: ghcr.io/johnmcfarlane/simple-cpp/${{ matrix.profile }}
+          imageTag: 3
+          runCmd: |
+            .devcontainer/gcc-gcov/report
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v3
+        if: ${{ matrix.profile }} == 'gcc-gcov'
+        with:
+          name: coverage-report
+          path: ~/build/gcc-gcov/test-coverage.html
+          if-no-files-found: error
 
   lint:
     name: lint
