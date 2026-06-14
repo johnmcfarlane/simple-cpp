@@ -1,6 +1,6 @@
 module;
 
-#include <fmt/printf.h>
+import fmt;
 
 export module simple;
 
