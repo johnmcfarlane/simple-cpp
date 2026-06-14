@@ -4,5 +4,15 @@
 
 set -euox pipefail
 
+profile="${1:-gcc-release}"
+build_dir="$BUILD_DIR_PARENT"/"$profile"
+
+# Go to the build directory.
+cd "$build_dir"
+
+# Initialize build environment.
+# shellcheck source=/dev/null
+source "$build_dir"/conanbuild.sh
+
 # Build project.
-cmake --build "$BUILD_DIR" --target clean
+cmake --build "$build_dir" --target clean

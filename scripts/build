@@ -3,15 +3,21 @@
 set -euox pipefail
 
 project_dir="$(realpath "$(dirname -- "$0")/..")"
-cmake_project_dir="${1:-$project_dir}"
+profile="$1"
+cmake_project_dir="${2:-$project_dir}"
+build_dir="$BUILD_DIR_PARENT"/"$profile"
+
+# Initialize build environment.
+# shellcheck source=/dev/null
+source "$build_dir"/conanbuild.sh
 
 # Generate build system.
 cmake \
-    --toolchain "$BUILD_DIR"/conan_toolchain.cmake \
-    -B "$BUILD_DIR" \
-    -DCMAKE_PREFIX_PATH="$BUILD_DIR" \
+    --toolchain "$build_dir"/conan_toolchain.cmake \
+    -B "$build_dir" \
+    -DCMAKE_PREFIX_PATH="$build_dir" \
     -G Ninja \
     -S "$cmake_project_dir"
 
 # Build project.
-cmake --build "$BUILD_DIR" --verbose
+cmake --build "$build_dir" --verbose

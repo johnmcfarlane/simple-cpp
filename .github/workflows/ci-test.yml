@@ -101,8 +101,7 @@ jobs:
       - name: Build and run control tests
         uses: devcontainers/ci@v0.3
         with:
-          configFile: .devcontainer/${{ matrix.profile }}/devcontainer.json
-          imageName: ghcr.io/johnmcfarlane/simple-cpp/ci-test-${{ matrix.profile }}
+          imageName: ghcr.io/johnmcfarlane/simple-cpp/ci-test
           imageTag: 3
           env: |
             TRIGGER_CLANG_TIDY=${{ matrix.trigger_clang_tidy }}
@@ -111,5 +110,6 @@ jobs:
             TRIGGER_UBSAN=${{ matrix.trigger_ubsan }}
             TRIGGER_WARNING=${{ matrix.trigger_warning }}
           runCmd: |
-            scripts/build .github/workflows/ci-test
-            scripts/test
+            scripts/install ${{ matrix.profile }}
+            scripts/build ${{ matrix.profile }} .github/workflows/ci-test
+            scripts/test ${{ matrix.profile }}

@@ -42,12 +42,12 @@ jobs:
       - name: Build and run tests
         uses: devcontainers/ci@v0.3
         with:
-          configFile: .devcontainer/${{ matrix.profile }}/devcontainer.json
-          imageName: ghcr.io/johnmcfarlane/simple-cpp/${{ matrix.profile }}
-          imageTag: 3
+          imageName: ghcr.io/johnmcfarlane/simple-cpp
+          imageTag: 4
           runCmd: |
-            scripts/build
-            scripts/test
+            scripts/install ${{ matrix.profile }}
+            scripts/build ${{ matrix.profile }}
+            scripts/test ${{ matrix.profile }}
 
   lint:
     name: lint
@@ -69,7 +69,6 @@ jobs:
       - name: Run linter
         uses: devcontainers/ci@v0.3
         with:
-          configFile: .devcontainer/lint/devcontainer.json
           imageName: ghcr.io/johnmcfarlane/simple-cpp/lint
-          imageTag: 3
+          imageTag: 4
           runCmd: scripts/lint
