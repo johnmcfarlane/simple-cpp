@@ -24,63 +24,63 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - devcontainer: clang-debug
+          - profile: clang-debug
             trigger_clang_tidy: "FALSE"
             trigger_stdlib: "TRUE"
             trigger_tsan: "FALSE"
             trigger_ubsan: "TRUE"
             trigger_warning: "TRUE"
 
-          - devcontainer: clang-release
+          - profile: clang-release
             trigger_clang_tidy: "FALSE"
             trigger_stdlib: "FALSE"
             trigger_tsan: "FALSE"
             trigger_ubsan: "FALSE"
             trigger_warning: "FALSE"
 
-          - devcontainer: clang-test
+          - profile: clang-test
             trigger_clang_tidy: "FALSE"
             trigger_stdlib: "TRUE"
             trigger_tsan: "FALSE"
             trigger_ubsan: "TRUE"
             trigger_warning: "TRUE"
 
-          - devcontainer: clang-test-fuzzer
+          - profile: clang-test-fuzzer
             trigger_clang_tidy: "FALSE"
             trigger_stdlib: "TRUE"
             trigger_tsan: "FALSE"
             trigger_ubsan: "TRUE"
             trigger_warning: "TRUE"
 
-          - devcontainer: clang-test-tsan
+          - profile: clang-test-tsan
             trigger_clang_tidy: "FALSE"
             trigger_stdlib: "FALSE"
             trigger_tsan: "TRUE"
             trigger_ubsan: "FALSE"
             trigger_warning: "TRUE"
 
-          - devcontainer: clang-tidy
+          - profile: clang-tidy
             trigger_clang_tidy: "TRUE"
             trigger_stdlib: "TRUE"
             trigger_tsan: "FALSE"
             trigger_ubsan: "TRUE"
             trigger_warning: "TRUE"
 
-          - devcontainer: gcc-debug
+          - profile: gcc-debug
             trigger_clang_tidy: "FALSE"
             trigger_stdlib: "TRUE"
             trigger_tsan: "FALSE"
             trigger_ubsan: "TRUE"
             trigger_warning: "TRUE"
 
-          - devcontainer: gcc-release
+          - profile: gcc-release
             trigger_clang_tidy: "FALSE"
             trigger_stdlib: "FALSE"
             trigger_tsan: "FALSE"
             trigger_ubsan: "FALSE"
             trigger_warning: "FALSE"
 
-          - devcontainer: gcc-test
+          - profile: gcc-test
             trigger_clang_tidy: "FALSE"
             trigger_stdlib: "TRUE"
             trigger_tsan: "FALSE"
@@ -103,8 +103,8 @@ jobs:
         env:
           PROJECT_SUBDIRECTORY: ".github/workflows/ci-test"
         with:
-          configFile: .devcontainer/${{ matrix.devcontainer }}/devcontainer.json
-          imageName: ghcr.io/johnmcfarlane/simple-cpp/ci-test-${{ matrix.devcontainer }}
+          configFile: .devcontainer/${{ matrix.profile }}/devcontainer.json
+          imageName: ghcr.io/johnmcfarlane/simple-cpp/ci-test-${{ matrix.profile }}
           imageTag: 3
           env: |
             TRIGGER_CLANG_TIDY=${{ matrix.trigger_clang_tidy }}
