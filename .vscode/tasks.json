@@ -27,6 +27,17 @@
             },
         },
         {
+            "label": "lint",
+            "type": "shell",
+            "command": "${workspaceFolder}/.devcontainer/lint/lint",
+            "group": {
+                "kind": "test",
+            },
+            "presentation": {
+                "clear": true,
+            },
+        },
+        {
             "label": "test",
             "dependsOn": "build",
             "type": "shell",
