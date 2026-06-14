@@ -39,6 +39,14 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Cache build artefacts
+        uses: actions/cache@v4
+        with:
+          key: ${{ matrix.profile }}-${{ hashFiles('conanfile.*') }}
+          path: |
+            ~/.conan2/p
+            ~/build/${{ matrix.profile }}
+
       - name: Build and run tests
         uses: devcontainers/ci@v0.3
         with:
@@ -47,6 +55,8 @@ jobs:
           runCmd: |
             scripts/build ~/build ${{ matrix.profile }}
             scripts/test ~/build ${{ matrix.profile }}
+            ls -al ~/.conan2/p
+            ls -al ~/build/${{ matrix.profile }}
 
   lint:
     name: lint
