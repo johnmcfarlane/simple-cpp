@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# run after invoking workspace/build with the same parameters
+
+set -euox pipefail
+
+build_dir_root="$1"
+profile="${2:-gcc-release}"
+
+build_dir="$build_dir_root"/"$profile"
+
+# Go to the build directory.
+cd "$build_dir"
+
+# Initialize build environment.
+# shellcheck source=/dev/null
+source "$build_dir"/conanbuild.sh
+
+# Run unit tests.
+ctest --output-on-failure --parallel --test-dir "$build_dir" --verbose
