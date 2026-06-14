@@ -19,7 +19,8 @@ and optionally:
 
 See [conanfile.txt](conanfile.txt) for software dependencies, which include:
 
-* [Catch2](https://github.com/catchorg/Catch2) 3.14.0
+* [Catch2](https://github.com/catchorg/Catch2) 3.14
+* [fmt](https://github.com/fmtlib/fmt) 12
 
 ## Instructions
 
