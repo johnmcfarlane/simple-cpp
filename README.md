@@ -27,7 +27,9 @@ See [conanfile.txt](conanfile.txt) for software dependencies, which include:
 Basic VS Code tasks are provided to build and test the software. To build and test:
 
 1. Follow the [VS Code Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers#installation) instructions.
-1. Connect to the Internet.
-1. Run command, "Dev Containers: Open Folder in Container..." and select [the project directory](.).
-1. Choose the [GCC test](.devcontainer/gcc-test/devcontainer.json) dev container.
-1. Run command, "Tasks: Run Test Task".
+1. Open the project in a container:
+   1. Run command, "Dev Containers: Open Folder in Container...".
+   1. Select [the project directory](.).
+1. Run the _test_ task:
+   1. Run command, "Tasks: Run Task", select "test".
+   1. Choose profile, [gcc-release](scripts/profiles/gcc-release).

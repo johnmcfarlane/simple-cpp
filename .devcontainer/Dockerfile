@@ -42,26 +42,8 @@ USER tux
 
 ENV BUILD_DIR=/home/tux/build
 
-# set system wide Clang-Tidy configuration
-COPY .clang-tidy /
-
 # configure Conan
 COPY --chown=tux .devcontainer/conan-config /home/tux/conan-config
 RUN conan config install /home/tux/conan-config
 RUN rm -rf /home/tux/conan-config
 RUN conan profile detect --force
-
-# install dependencies
-COPY --chown=tux conanfile.txt /home/tux
-ARG profile
-RUN conan install \
-    --build="*" \
-    --generator=CMakeDeps \
-    --generator=CMakeToolchain \
-    --output-folder="$BUILD_DIR" \
-    --profile=${profile} \
-    /home/tux
-RUN rm /home/tux/conanfile.txt
-
-# append dev environment script to user environment script
-RUN cat $BUILD_DIR/conanbuild.sh >> ~/.bashrc

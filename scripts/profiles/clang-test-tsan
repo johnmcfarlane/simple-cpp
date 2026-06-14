@@ -13,6 +13,7 @@ CXX=clang++
 [conf]
 !&:tools.build:cxxflags=["-fdiagnostics-color=always", "-fno-sanitize-recover=all", "-fsanitize=thread"]
 &:tools.build:cxxflags=["-fdiagnostics-color=always", "-fno-sanitize-recover=all", "-fsanitize=thread", "-g", "-Wall", "-Werror", "-Wextra"]
+&:tools.cmake.cmaketoolchain:extra_variables={"CMAKE_BUILD_TYPE": "Debug"}
 
 [tool_requires]
 fmt/*:cmake/[~4.3]

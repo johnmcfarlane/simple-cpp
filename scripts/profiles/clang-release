@@ -10,5 +10,8 @@ os=Linux
 [buildenv]
 CXX=clang++
 
+[conf]
+&:tools.cmake.cmaketoolchain:extra_variables={"CMAKE_BUILD_TYPE": "Release"}
+
 [tool_requires]
 fmt/*:cmake/[~4.3]

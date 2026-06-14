@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+set -euox pipefail
+
+project_dir="$(realpath "$(dirname -- "$0")/..")"
+
+build_dir_root="$1"
+profile="${2:-gcc-release}"
+cmake_project_dir="${3:-$project_dir}"
+
+profile_path="$project_dir"/scripts/profiles/"$profile"
+build_dir="$build_dir_root"/"$profile"
+
+# Create the build directory.
+# Make it unique to the profile, in case multiple profiles are built.
+mkdir -p "$build_dir"
+
+# Install dependencies.
+conan install \
+    --build="missing" \
+    --generator=CMakeDeps \
+    --generator=CMakeToolchain \
+    --output-folder="$build_dir" \
+    --profile="$profile_path" \
+    "$project_dir"
+
+# Initialize build environment.
+# shellcheck source=/dev/null
+source "$build_dir"/conanbuild.sh
+
+# Generate build system.
+cmake \
+    --toolchain "$build_dir"/conan_toolchain.cmake \
+    -B "$build_dir" \
+    -DCMAKE_PREFIX_PATH="$build_dir" \
+    -G Ninja \
+    -S "$cmake_project_dir"
+
+# Build project.
+cmake --build "$build_dir" --verbose
