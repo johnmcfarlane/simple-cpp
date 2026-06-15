@@ -4,6 +4,7 @@ build_type=Debug
 compiler=clang
 compiler.cppstd=26
 compiler.libcxx=libc++
+compiler.sanitizer=AddressUndefinedBehavior
 compiler.version=22
 os=Linux
 

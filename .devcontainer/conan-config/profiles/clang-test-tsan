@@ -4,6 +4,7 @@ build_type=Debug
 compiler=clang
 compiler.cppstd=26
 compiler.libcxx=libc++
+compiler.sanitizer=ThreadUndefinedBehavior
 compiler.version=22
 os=Linux
 
@@ -11,8 +12,8 @@ os=Linux
 CXX=clang++
 
 [conf]
-!&:tools.build:cxxflags=["-fdiagnostics-color=always", "-fno-sanitize-recover=all", "-fsanitize=thread"]
-&:tools.build:cxxflags=["-fdiagnostics-color=always", "-fno-sanitize-recover=all", "-fsanitize=thread", "-g", "-Wall", "-Werror", "-Wextra"]
+!&:tools.build:cxxflags=["-fdiagnostics-color=always", "-fno-sanitize-recover=all", "-fsanitize=thread,undefined"]
+&:tools.build:cxxflags=["-fdiagnostics-color=always", "-fno-sanitize-recover=all", "-fsanitize=thread,undefined", "-g", "-Wall", "-Werror", "-Wextra"]
 
 [tool_requires]
 fmt/*:cmake/[~4.3]

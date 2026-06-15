@@ -4,6 +4,7 @@ build_type=Release
 compiler=gcc
 compiler.cppstd=26
 compiler.libcxx=libstdc++
+compiler.sanitizer=AddressUndefinedBehavior
 compiler.version=16
 os=Linux
 

@@ -56,7 +56,7 @@ jobs:
             trigger_clang_tidy: "FALSE"
             trigger_stdlib: "FALSE"
             trigger_tsan: "TRUE"
-            trigger_ubsan: "FALSE"
+            trigger_ubsan: "TRUE"
             trigger_warning: "TRUE"
 
           - profile: clang-tidy

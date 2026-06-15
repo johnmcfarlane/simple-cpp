@@ -1,5 +1,7 @@
 compiler:
     clang:
         version: ["22"]
+        sanitizer: [null, AddressUndefinedBehavior, AddressFuzzer, ThreadUndefinedBehavior]
     gcc:
         version: ["16"]
+        sanitizer: [null, AddressUndefinedBehavior]
