@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -euox pipefail
+
+project_dir="$(realpath "$(dirname -- "$0")/..")"
+
+build_dir_root="$1"
+profiles_path="${2:-scripts/profiles}"
+
+mkdir "$build_dir_root"
+
+for profile in $(cd "$profiles_path" && find -- *)
+do
+    build_dir="$build_dir_root"/"$profile"
+    profile_path="$profiles_path"/"$profile"
+
+    # Create the build directory.
+    # Make it unique to the profile, in case multiple profiles are built.
+   mkdir "$build_dir"
+
+    # Install dependencies.
+    conan install \
+        --build="missing" \
+        --generator=CMakeDeps \
+        --generator=CMakeToolchain \
+        --output-folder="$build_dir" \
+        --profile="$profile_path" \
+        "$project_dir"
+done

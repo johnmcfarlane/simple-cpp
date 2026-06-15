@@ -1,16 +1,14 @@
-// built with GCC; optimized for testing
 {
-    "name": "GCC test",
     "build": {
         "dockerfile": "${localWorkspaceFolder}/.devcontainer/Dockerfile",
-        "args": {
-            "profile": "gcc-test"
-        },
         "context": "${localWorkspaceFolder}",
         "options": ["--progress=plain"]
     },
+    "runArgs": [
+        "--privileged"
+    ],
     "postCreateCommand": {
-        "configure build system": "cmake --toolchain $BUILD_DIR/conan_toolchain.cmake -B $BUILD_DIR -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=$BUILD_DIR -G Ninja -S ${localEnv:PROJECT_SUBDIRECTORY:.}"
+        "configure build system": "scripts/install $BUILD_DIR scripts/profiles"
     },
     "customizations": {
         "vscode": {
