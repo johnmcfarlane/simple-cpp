@@ -8,7 +8,6 @@
         "--privileged"
     ],
     "postCreateCommand": {
-        "configure build system": "scripts/install $BUILD_DIR scripts/profiles"
     },
     "customizations": {
         "vscode": {
