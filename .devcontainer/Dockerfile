@@ -34,34 +34,10 @@ RUN update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-22 1
 
 RUN pip install "conan==2.24.0" "shellcheck-py==0.11.0.1" --break-system-packages --no-cache-dir
 
-RUN groupadd --gid 1000 tux \
-    && useradd --create-home --gid 1000 --shell /bin/bash --uid 1000 tux \
-    && echo tux ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/tux \
-    && chmod 0440 /etc/sudoers.d/tux
-USER tux
-
-ENV BUILD_DIR=/home/tux/build
-
-# set system wide Clang-Tidy configuration
-COPY .clang-tidy /
+ENV BUILD_DIR=/root/build
 
 # configure Conan
-COPY --chown=tux .devcontainer/conan-config /home/tux/conan-config
-RUN conan config install /home/tux/conan-config
-RUN rm -rf /home/tux/conan-config
+COPY .devcontainer/conan-config /root/conan-config
+RUN conan config install /root/conan-config
+RUN rm -rf /root/conan-config
 RUN conan profile detect --force
-
-# install dependencies
-COPY --chown=tux conanfile.txt /home/tux
-ARG profile
-RUN conan install \
-    --build="*" \
-    --generator=CMakeDeps \
-    --generator=CMakeToolchain \
-    --output-folder="$BUILD_DIR" \
-    --profile=${profile} \
-    /home/tux
-RUN rm /home/tux/conanfile.txt
-
-# append dev environment script to user environment script
-RUN cat $BUILD_DIR/conanbuild.sh >> ~/.bashrc

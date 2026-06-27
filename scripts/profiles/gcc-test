@@ -14,6 +14,7 @@ CXX=g++
 [conf]
 !&:tools.build:cxxflags=["-D_GLIBCXX_ASSERTIONS=1", "-fdiagnostics-color=always", "-fno-sanitize-recover=all", "-fsanitize=address,undefined"]
 &:tools.build:cxxflags=["-D_GLIBCXX_ASSERTIONS=1", "-fdiagnostics-color=always", "-fno-sanitize-recover=all", "-fsanitize=address,undefined", "-g", "-Wall", "-Werror", "-Wextra"]
+&:tools.cmake.cmaketoolchain:extra_variables={"CMAKE_BUILD_TYPE": "Release"}
 
 [tool_requires]
 fmt/*:cmake/[~4.3]

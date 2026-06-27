@@ -14,6 +14,7 @@ CXX=clang++
 [conf]
 !&:tools.build:cxxflags=["-D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_DEBUG", "-fdiagnostics-color=always", "-fsanitize-trap", "-fsanitize=address,undefined"]
 &:tools.build:cxxflags=["-D_LIBCPP_HARDENING_MODE=_LIBCPP_HARDENING_MODE_DEBUG", "-fdiagnostics-color=always", "-fsanitize-trap", "-fsanitize=address,undefined", "-g", "-Wall", "-Werror", "-Wextra"]
+&:tools.cmake.cmaketoolchain:extra_variables={"CMAKE_BUILD_TYPE": "Debug"}
 
 [tool_requires]
 fmt/*:cmake/[~4.3]

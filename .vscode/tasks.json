@@ -6,7 +6,11 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "cmake --build ${env:BUILD_DIR}",
+            "command": "${workspaceFolder}/scripts/build",
+            "args": [
+                "${env:BUILD_DIR}",
+                "${input:profile}"
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -18,7 +22,11 @@
         {
             "label": "clean",
             "type": "shell",
-            "command": "cmake --build ${env:BUILD_DIR} --target clean",
+            "command": "${workspaceFolder}/scripts/clean",
+            "args": [
+                "${env:BUILD_DIR}",
+                "${input:profile}"
+            ],
             "group": {
                 "kind": "build",
             },
@@ -29,7 +37,7 @@
         {
             "label": "lint",
             "type": "shell",
-            "command": "${workspaceFolder}/.devcontainer/lint/lint",
+            "command": "${workspaceFolder}/scripts/lint",
             "group": {
                 "kind": "test",
             },
@@ -41,7 +49,11 @@
             "label": "test",
             "dependsOn": "build",
             "type": "shell",
-            "command": "ctest --output-on-failure --parallel --test-dir ${env:BUILD_DIR}",
+            "command": "${workspaceFolder}/scripts/test",
+            "args": [
+                "${env:BUILD_DIR}",
+                "${input:profile}"
+            ],
             "group": {
                 "kind": "test",
                 "isDefault": true
@@ -50,5 +62,24 @@
                 "clear": true,
             },
         },
+    ],
+    "inputs": [
+        {
+            "id": "profile",
+            "type": "pickString",
+            "description": "Conan profile",
+            "default": "gcc-release",
+            "options": [
+                "clang-debug",
+                "clang-release",
+                "clang-test",
+                "clang-test-fuzzer",
+                "clang-test-tsan",
+                "clang-tidy",
+                "gcc-debug",
+                "gcc-release",
+                "gcc-test"
+            ]
+        }
     ]
 }
