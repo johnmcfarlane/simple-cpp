@@ -100,8 +100,6 @@ jobs:
 
       - name: Build and run control tests
         uses: devcontainers/ci@v0.3
-        env:
-          PROJECT_SUBDIRECTORY: ".github/workflows/ci-test"
         with:
           configFile: .devcontainer/${{ matrix.profile }}/devcontainer.json
           imageName: ghcr.io/johnmcfarlane/simple-cpp/ci-test-${{ matrix.profile }}
@@ -113,5 +111,5 @@ jobs:
             TRIGGER_UBSAN=${{ matrix.trigger_ubsan }}
             TRIGGER_WARNING=${{ matrix.trigger_warning }}
           runCmd: |
-            scripts/build
+            scripts/build .github/workflows/ci-test
             scripts/test
