@@ -8,11 +8,44 @@ on:
   workflow_dispatch:
 
 jobs:
-  unit-tests:
-    name: test
+  build-image:
     runs-on: ubuntu-latest
     permissions:
       packages: write
+
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Check out code
+        uses: actions/checkout@v6
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build image
+        uses: devcontainers/ci@v0.3
+        with:
+          cacheFrom: ghcr.io/johnmcfarlane/simple-cpp
+          imageName: ghcr.io/johnmcfarlane/simple-cpp
+          imageTag: 5
+          push: always
+
+  unit-tests:
+    needs: build-image
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+
+    container:
+      image: ghcr.io/johnmcfarlane/simple-cpp:5
+      credentials:
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GITHUB_TOKEN }}
 
     strategy:
       fail-fast: false
@@ -29,46 +62,40 @@ jobs:
           - gcc-test
 
     steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Check out code
         uses: actions/checkout@v7
 
       - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v4
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and run tests
-        uses: devcontainers/ci@v0.3
-        with:
-          imageName: ghcr.io/johnmcfarlane/simple-cpp
-          imageTag: 4
-          runCmd: |
-            scripts/install ${{ matrix.profile }}
-            scripts/build ${{ matrix.profile }}
-            scripts/test ${{ matrix.profile }}
+        run: |
+          scripts/install ${{ matrix.profile }}
+          scripts/build ${{ matrix.profile }}
+          scripts/test ${{ matrix.profile }}
 
   lint:
-    name: lint
+    needs: build-image
     runs-on: ubuntu-latest
     permissions:
       packages: write
+
+    container:
+      image: ghcr.io/johnmcfarlane/simple-cpp:4
+      credentials:
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - name: Check out code
         uses: actions/checkout@v7
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v4 
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Run linter
-        uses: devcontainers/ci@v0.3
-        with:
-          imageName: ghcr.io/johnmcfarlane/simple-cpp/lint
-          imageTag: 4
-          runCmd: scripts/lint
+        run: scripts/lint
