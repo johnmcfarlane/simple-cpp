@@ -7,11 +7,10 @@
         "name": "test",
         "type": "cppdbg",
         "request": "launch",
-        "preLaunchTask": "build",
-        "program": "${env:BUILD_DIR}/src/simple.unit-test",
+        "program": "${env:BUILD_DIR_PARENT}/${input:profile}/src/simple.unit-test",
         "args": [],
         "stopAtEntry": false,
-        "cwd": "${env:BUILD_DIR}",
+        "cwd": "${env:BUILD_DIR_PARENT}",
         "environment": [],
         "externalConsole": false,
         "MIMode": "gdb",
@@ -27,5 +26,23 @@
                 "ignoreFailures": true
             }
         ]
-    }]
+    }],
+    "inputs": [
+        {
+            "id": "profile",
+            "type": "pickString",
+            "description": "Conan profile",
+            "options": [
+                "clang-debug",
+                "clang-release",
+                "clang-test",
+                "clang-test-fuzzer",
+                "clang-test-tsan",
+                "clang-tidy",
+                "gcc-debug",
+                "gcc-release",
+                "gcc-test"
+            ]
+        }
+    ]
 }

@@ -1,15 +1,12 @@
-// built with Clang; optimized for production
 {
-    "name": "Clang release",
     "build": {
         "dockerfile": "${localWorkspaceFolder}/.devcontainer/Dockerfile",
-        "args": {
-            "profile": "clang-release"
-        },
         "context": "${localWorkspaceFolder}",
         "options": ["--progress=plain"]
     },
-    "remoteUser": "tux",
+    "runArgs": [
+        "--privileged"
+    ],
     "customizations": {
         "vscode": {
             "extensions": [

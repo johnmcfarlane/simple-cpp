@@ -4,5 +4,12 @@
 
 set -euox pipefail
 
+profile="${1:-gcc-release}"
+build_dir="$BUILD_DIR_PARENT"/"$profile"
+
+# Initialize build environment.
+# shellcheck source=/dev/null
+source "$build_dir"/conanbuild.sh
+
 # Run unit tests.
-ctest --output-on-failure --parallel --test-dir "$BUILD_DIR" --verbose
+ctest --output-on-failure --parallel --test-dir "$build_dir" --verbose

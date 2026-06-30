@@ -4,21 +4,39 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
+            "label": "install",
             "type": "shell",
-            "command": "${workspaceFolder}/scripts/build",
+            "command": "${workspaceFolder}/scripts/install",
+            "args": [
+                "${input:profile}"
+            ],
             "group": {
-                "kind": "build",
-                "isDefault": true
+                "kind": "build"
             },
             "presentation": {
                 "clear": true,
             },
         },
         {
+            "label": "build",
+            "dependsOn": "install",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/build",
+            "args": [
+                "${input:profile}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+        },
+        {
             "label": "clean",
             "type": "shell",
             "command": "${workspaceFolder}/scripts/clean",
+            "args": [
+                "${input:profile}"
+            ],
             "group": {
                 "kind": "build",
             },
@@ -42,6 +60,23 @@
             "dependsOn": "build",
             "type": "shell",
             "command": "${workspaceFolder}/scripts/test",
+            "args": [
+                "${input:profile}"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+        },
+        {
+            "label": "report coverage",
+            "dependsOn": "test",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/report",
+            "args": [
+                "${env:BUILD_DIR}",
+                "${input:profile}"
+            ],
             "group": {
                 "kind": "test",
                 "isDefault": true
@@ -50,5 +85,24 @@
                 "clear": true,
             },
         },
+    ],
+    "inputs": [
+        {
+            "id": "profile",
+            "type": "pickString",
+            "description": "Conan profile",
+            "options": [
+                "clang-debug",
+                "clang-release",
+                "clang-test",
+                "clang-test-fuzzer",
+                "clang-test-tsan",
+                "clang-tidy",
+                "gcc-debug",
+                "gcc-gcov",
+                "gcc-release",
+                "gcc-test"
+            ]
+        }
     ]
 }
